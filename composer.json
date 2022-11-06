@@ -1,0 +1,16 @@
+{
+    "name": "yeongmiyoon/booking",
+    "autoload": {
+        "psr-4": {
+            "Yeongmiyoon\\Booking\\": "class/"
+        },
+        "classmap": ["class/","src/"]
+    },
+    "authors": [
+        {
+            "name": "윤영미",
+            "email": "maie421@naver.com"
+        }
+    ],
+    "require": {}
+}
