@@ -3,8 +3,10 @@
 require_once "../common/header.php";
 ?>
 <head>
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script
 
@@ -27,8 +29,7 @@ require_once "../common/header.php";
                 <!--                <a href="#" class="card-link">Card link</a>-->
                 <!--                <a href="#" class="card-link">Another link</a>-->
                 <h5>500,000 / 박</h5>
-                <input type="text" placehoder="Start Date" id="datepicker" class="mb-3"/>
-                <input type="text" placehoder="End Date" id="datepicker2" class="mb-3"/>
+                <input type="text" name="datefilter" value=""  class="mb-3" />
                 <select class="form-select" aria-label="Default select example">
                     <option selected>인원</option>
                     <option value="1">1명</option>
@@ -80,18 +81,21 @@ require_once "../common/header.php";
         } ?>
     </div>
     <script>
-        $(document).ready(function () {
+        $(function() {
 
-            $('#datepicker').datepicker({
-                format: "yyyy-mm-dd",
-                startDate: '-1y -1m',
-                endDate: '+2m +10d'
+            $('input[name="datefilter"]').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
             });
 
-            $('#datepicker2').datepicker({
-                format: "yyyy-mm-dd",
-                startDate: '-1m',
-                endDate: '+10d'
+            $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+            });
+
+            $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
             });
 
         });
