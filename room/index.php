@@ -3,10 +3,11 @@
 require_once "../common/header.php";
 ?>
 <head>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script
 
@@ -29,7 +30,8 @@ require_once "../common/header.php";
                 <!--                <a href="#" class="card-link">Card link</a>-->
                 <!--                <a href="#" class="card-link">Another link</a>-->
                 <h5>500,000 / 박</h5>
-                <input type="text" name="datefilter" value=""  class="mb-3" />
+                <input type="text" id="datepicker1" class="mb-3">
+                <input type="text" id="datepicker2" class="mb-3">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>인원</option>
                     <option value="1">1명</option>
@@ -82,22 +84,37 @@ require_once "../common/header.php";
     </div>
     <script>
         $(function() {
+            var disabledDays = ["2022-11-14","2022-11-15","2013-7-26"];
 
-            $('input[name="datefilter"]').daterangepicker({
-                autoUpdateInput: false,
-                locale: {
-                    cancelLabel: 'Clear'
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                minDate: new Date(2022, 4 - 1, 1),
+                maxDate: new Date(2022, 11 - 1, 31),
+                showMonthAfterYear: true,
+                yearSuffix: '년',
+                beforeShowDay: disableAllTheseDays
+            });
+
+            $(function() {
+                $("#datepicker1, #datepicker2").datepicker();
+            });
+// 특정일 선택막기
+            function disableAllTheseDays(date) {
+                var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+                for (i = 0; i < disabledDays.length; i++) {
+                    if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+                        return [false];
+                    }
                 }
-            });
-
-            $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
-            });
-
-            $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
-            });
-
+                return [true];
+            }
         });
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
