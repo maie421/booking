@@ -6,6 +6,7 @@ require_once "common/header.php";
         <link rel="stylesheet" type="text/css" href="./common/css/card.css">
         <link rel="stylesheet" type="text/css" href="./common/css/star.css">
     </head>
+    <body>
     <div class="d-flex justify-content-center">
         <ul class="nav nav-tabs align-self-center">
             <li class="nav-item">
@@ -62,6 +63,7 @@ require_once "common/header.php";
             </div>
         </div>
     </section>
+    </body>
 <?php
 require_once "common/footer.php";
 ?>
