@@ -15,7 +15,6 @@ class DB_CONNECT
             // 이렇게 에러 모드를 설정하면, PDO 생성자는 에러가 발생할 때마다 PDOException 예외를 던질 것이다.
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "서버와의 연결 성공!";
         } catch (PDOException $ex) {
             echo "서버와의 연결 실패! : ".$ex->getMessage()."<br>";
         }
