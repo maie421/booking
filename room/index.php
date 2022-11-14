@@ -23,7 +23,7 @@ require_once "../common/header.php";
             <img src="https://a0.muscache.com/im/pictures/94714109/66313f84_original.jpg?im_w=1200"
                  class="img-thumbnail">
         </div>
-        <div class="card p-2" style="width: 25rem;">
+        <div class="card p-2" style="width: 40rem;">
             <div class="card-body">
                 <h5>500,000 / 박</h5>
                 <input type="text" id="datepicker1" class="mb-3">

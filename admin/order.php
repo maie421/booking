@@ -39,7 +39,8 @@
                 </div>
             </div>
         </div>
-        <?}?>
+        <?php
+        }?>
     </div>
 </div>
 <script type="text/javascript">
