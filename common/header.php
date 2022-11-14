@@ -14,14 +14,15 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="../common/js/header.js"></script>
 
 
 </head>
 <body>
 <div class="container">
     <div class="d-flex justify-content-between">
-        <img src="../img/logo.png" height="100" width="150"/>
+        <a href="/"><img src="../img/logo.png" height="100" width="150"/></a>
         <div class="align-self-center">
             <div class="input-group  mx-sm-3">
                 <input type="text" class="form-control" placeholder="검색 시작하기"
@@ -50,22 +51,21 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
             <div class="modal-body">
                 <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
                         aria-label="Close"></button>
-                <div class="myform">
+                <div>
                     <h1 class="text-center">로그인</h1>
-                    <form>
+                    <form class="loginFormObject">
                         <div class="mb-3 mt-4">
                             이메일
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
                                    aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             패스워드
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                            <button type="submit" class="btn btn-primary mt-3">로그인</button>
+                            <button type="button" class="btn btn-primary mt-3" onclick="loginForm()">로그인</button>
                         </div>
-                        <!--                        <p class="mt-3"><a data-bs-toggle="modal" data-bs-target="#JoinForm">회원가입</a></p>-->
                     </form>
                 </div>
             </div>
@@ -83,7 +83,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                         aria-label="Close"></button>
                 <div class="myform">
                     <h1 class="text-center">회원가입</h1>
-                    <form>
+                    <form class="joinFormObject">
                         <div class="mb-3 mt-4">
                             이메일
                             <input type="email" class="form-control" id="exampleInputEmail1"
@@ -104,7 +104,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                             <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                            <button type="submit" class="btn btn-primary mt-3">확인</button>
+                            <button type="submit" class="btn btn-primary mt-3" onclick="joinForm()">확인</button>
                         </div>
                     </form>
                 </div>

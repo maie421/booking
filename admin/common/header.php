@@ -14,7 +14,7 @@ require_once dirname(__FILE__, 3).'/vendor/autoload.php';
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 
 </head>

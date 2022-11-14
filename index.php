@@ -1,26 +1,30 @@
 <?php
 
 require_once "common/header.php";
+$type = $_GET['type']?? '';
 ?>
     <head>
         <link rel="stylesheet" type="text/css" href="./common/css/card.css">
         <link rel="stylesheet" type="text/css" href="./common/css/star.css">
+        <script src="./common/js/indexPage.js"></script>
     </head>
     <body>
     <div class="d-flex justify-content-center">
         <ul class="nav nav-tabs align-self-center">
             <li class="nav-item">
-                <a class="nav-link active" href="#">모텔</a>
+                <a class="nav-link <?=$type=="" ? 'active' :''?>"  href="/">전체</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">호텔</a>
+                <a class="nav-link <?=$type=="motel" ? 'active' :''?>" href="/?type=motel">모텔</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">펜션</a>
+                <a class="nav-link <?=$type=="hotel" ? 'active' :''?>" href="/?type=hotel">호텔</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?=$type=="pension" ? 'active' :''?>" href="/?type=pension">펜션</a>
             </li>
         </ul>
     </div>
-
 
     <section class="main-content">
         <div class="container">
@@ -32,7 +36,7 @@ require_once "common/header.php";
                             <div class="food-card_img">
                                 <img src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-607458038229062130/original/1e20dfc7-ea12-44b2-a837-2bdcd8502133.jpeg?im_w=720"
                                      alt="">
-                                <a href="#"><i class="bi bi-heart" style="color:red"></i></a>
+                                <i class="bi bi-heart <?=$i?>"  style="color:red" onclick="heartClick('<?=$i?>')"></i>
                                 <!--                            <a href="#" ><i class="bi bi-suit-heart-fill" style="color:red"></i></i></a>-->
                             </div>
                             <div class="food-card_content">
