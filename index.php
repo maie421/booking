@@ -41,7 +41,7 @@ $type = $_GET['type']?? '';
                             </div>
                             <div class="food-card_content">
                                 <div class="food-card_title-section">
-                                    <a href="#!" class="food-card_title">해운대</a>
+                                    <a href="/room?code=R20302" class="food-card_title">해운대</a>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
