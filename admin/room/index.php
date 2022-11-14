@@ -18,8 +18,8 @@ require_once "../common/header.php";
                     <h5>해운대</h5>
                     <p class="card-text">최대 인원 : 5명 </p>
                     <p class="card-text">가격 : 3000 /박</p>
-                    <button type="button" class="btn btn-outline-dark">수정</button>
-                    <button type="button" class="btn btn-outline-dark">삭제</button>
+                    <a href="add.php" type="button" class="btn btn-outline-dark me-2">수정</a>
+                    <a type="button" class="btn btn-outline-dark">삭제</a>
                 </div>
             </div>
             <div class="d-flex border p-3 mb-3">
@@ -29,8 +29,8 @@ require_once "../common/header.php";
                     <h5>해운대</h5>
                     <p class="card-text">최대 인원 : 5명 </p>
                     <p class="card-text">가격 : 3000 /박</p>
-                    <button type="button" class="btn btn-outline-dark">수정</button>
-                    <button type="button" class="btn btn-outline-dark">삭제</button>
+                    <a type="button" class="btn btn-outline-dark me-2">수정</a>
+                    <a type="button" class="btn btn-outline-dark">삭제</a>
                 </div>
             </div>
         </div>

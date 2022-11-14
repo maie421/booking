@@ -1,5 +1,5 @@
 <head>
-    <script src="../common/js/indexPage.js"></script>
+    <script src="../common/js/main.js"></script>
 </head>
 <body>
 <div class="row row-cols-1 row-cols-md-2 g-4">

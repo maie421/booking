@@ -1,6 +1,6 @@
 const heartClick = (code) => {
     $.ajax({
-        url: "../ajax/index/heartInsertOrDelete.php",
+        url: "../ajax/main/heartInsertOrDelete.php",
         type: "POST",
         data: {code: code},
         dataType: "JSON",

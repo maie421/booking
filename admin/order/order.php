@@ -34,8 +34,8 @@
                 <p class="card-text">010-0000-0000</p>
                 <p class="card-text">예약 기간 : 2022-11-14 ~ 2022-11-15</p>
                 <div class="d-flex bd-highlight">
-                    <button type="button" class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</button>
-                    <button type="button" class="btn btn-outline-dark mr-3">예약 취소</button>
+                    <a href="/admin/order/modify.php" type="button" class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
+                    <a type="button" class="btn btn-outline-dark mr-3">예약 취소</a>
                 </div>
             </div>
         </div>

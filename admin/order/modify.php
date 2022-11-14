@@ -1,3 +1,7 @@
+<?php
+
+require_once "../common/header.php";
+?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -5,26 +9,34 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-<form>
-    <div class="form-group mb-3">
-        <label for="exampleFormControlInput1">room</label>
-        <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="이름">
-    </div>
-    <div class="form-group  mb-3">
-        <label for="exampleFormControlSelect1">인원</label>
-        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원">
-    </div>
-    <div class="form-group  mb-3">
-        <label for="exampleFormControlSelect1">가간</label>
-        <div class="form-group d-flex bd-highlight">
-            <input type="text" class="form-control mb-3" id="datepicker1" placeholder="2022-11-14">
-            <input type="text" class="form-control mb-3" id="datepicker2" placeholder="2022-11-14">
+<div class="container">
+    <div class="row flex-nowrap">
+        <?php
+        include_once "../common/navebar.php" ?>
+        <div class="col py-3 bg-white">
+            <form>
+                <div class="form-group mb-3">
+                    <label for="exampleFormControlInput1">room</label>
+                    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="이름">
+                </div>
+                <div class="form-group  mb-3">
+                    <label for="exampleFormControlSelect1">인원</label>
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원">
+                </div>
+                <div class="form-group  mb-3">
+                    <label for="exampleFormControlSelect1">가간</label>
+                    <div class="form-group d-flex bd-highlight">
+                        <input type="text" class="form-control mb-3" id="datepicker1" placeholder="2022-11-14">
+                        <input type="text" class="form-control mb-3" id="datepicker2" placeholder="2022-11-14">
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-primary">확인</button>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-primary">확인</button>
-    </div>
-</form>
+</div>
 </body>
 <script>
     $(function () {
@@ -62,3 +74,6 @@
         }
     });
 </script>
+<?php
+require_once "../../common/footer.php";
+?>

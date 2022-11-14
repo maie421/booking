@@ -6,7 +6,7 @@ $type = $_GET['type']?? '';
     <head>
         <link rel="stylesheet" type="text/css" href="./common/css/card.css">
         <link rel="stylesheet" type="text/css" href="./common/css/star.css">
-        <script src="./common/js/indexPage.js"></script>
+        <script src="common/js/main.js"></script>
     </head>
     <body>
     <div class="d-flex justify-content-center">
