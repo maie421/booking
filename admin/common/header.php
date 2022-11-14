@@ -21,7 +21,7 @@ require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 <div class="bg-secondary text-light">
     <div class="container">
         <div class="d-flex justify-content-between">
-            <img src="../img/logo.png" height="100" width="150"/>
+            <img src="../../img/logo.png" height="100" width="150"/>
             <div class="align-self-center">
                 <div class="dropdown">
                     <span class="me-3">관리자</span>

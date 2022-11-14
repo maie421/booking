@@ -1,3 +1,6 @@
+<head>
+    <script src="../common/js/indexPage.js"></script>
+</head>
 <body>
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <?php for ($i = 0; $i < 10; $i++){?>
@@ -8,6 +11,9 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <i class="bi bi-heart <?=$i?>"  style="color:red" onclick="heartClick('<?=$i?>')"></i>
+                    </div>
                     <h5 class="card-title">해운대</h5>
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>

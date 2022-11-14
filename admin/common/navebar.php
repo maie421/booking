@@ -3,12 +3,12 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start "
             id="menu">
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-secondary">
-                    <i class="bi bi-house"></i> <span class="ms-1 d-none d-sm-inline">객실 관리</span></a>
+                <a href="/admin" class="nav-link px-0 align-middle text-secondary">
+                    <i class="bi bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">예약 관리</span> </a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle text-secondary">
-                    <i class="bi bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">예약 관리</span> </a>
+                <a href="/admin/room" class="nav-link px-0 align-middle text-secondary">
+                    <i class="bi bi-house"></i> <span class="ms-1 d-none d-sm-inline">객실 관리</span></a>
             </li>
         </ul>
         <hr>
