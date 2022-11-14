@@ -33,7 +33,7 @@
                 <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#LoginForm">로그인</a></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LoginForm">회원가입</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm">회원가입</a></li>
                 </ul>
             </div>
         </div>
@@ -47,18 +47,48 @@
             <div class="modal-body">
                 <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="myform">
-                    <h1 class="text-center">Login</h1>
+                    <h1 class="text-center">로그인</h1>
                     <form>
                         <div class="mb-3 mt-4">
-                            Email address
+                            이메일
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            Password
+                            패스워드
                             <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <button type="submit" class="btn btn-light mt-3">LOGIN</button>
-                        <p class="mt-3"><a href="#">회원가입</a></p>
+                        <p class="mt-3"><a data-bs-toggle="modal" data-bs-target="#JoinForm">회원가입</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--회원가입 모달-->
+<div class="modal fade" id="JoinForm" tabindex="-1" aria-labelledby="JoinFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="myform">
+                    <h1 class="text-center">회원가입</h1>
+                    <form>
+                        <div class="mb-3 mt-4">
+                            이메일
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 mt-4">
+                            닉네임
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            패스워드
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-light mt-3">확인</button>
                     </form>
                 </div>
             </div>
