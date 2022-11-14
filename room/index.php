@@ -25,10 +25,6 @@ require_once "../common/header.php";
         </div>
         <div class="card p-2" style="width: 25rem;">
             <div class="card-body">
-                <!--                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-                <!--                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <!--                <a href="#" class="card-link">Card link</a>-->
-                <!--                <a href="#" class="card-link">Another link</a>-->
                 <h5>500,000 / 박</h5>
                 <input type="text" id="datepicker1" class="mb-3">
                 <input type="text" id="datepicker2" class="mb-3">
@@ -36,7 +32,8 @@ require_once "../common/header.php";
                     <option selected>인원</option>
                     <option value="1">1명</option>
                     <option value="2">2명</option>
-                    <option value="3">3</option>
+                    <option value="3">3명</option>
+                    <option value="3">4명</option>
                 </select>
                 <div class="d-grid gap-2 col-6 mx-auto mt-3">
                     <button class="btn btn-primary mb-5" type="button">예약하기</button>
