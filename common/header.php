@@ -90,8 +90,13 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                                    aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3 mt-4">
-                            닉네임
+                            이름
                             <input type="email" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 mt-4">
+                            휴대폰 번호
+                            <input type="phone" class="form-control" id="exampleInputEmail1"
                                    aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
