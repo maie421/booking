@@ -32,12 +32,36 @@
                 <span class="me-3">관리자</span>
                 <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#LoginForm">로그인</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#LoginForm">회원가입</a></li>
                 </ul>
             </div>
+        </div>
+    </div>
+</div>
 
+<!--로그인 모달-->
+<div class="modal fade" id="LoginForm" tabindex="-1" aria-labelledby="LoginFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="myform">
+                    <h1 class="text-center">Login</h1>
+                    <form>
+                        <div class="mb-3 mt-4">
+                            Email address
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            Password
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+                        <p class="mt-3"><a href="#">회원가입</a></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
