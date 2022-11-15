@@ -8,7 +8,9 @@ require_once "../common/header.php";
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script>
+
+    <script src="../common/js/detail.js"></script>
 
 </head>
 <body>
@@ -25,18 +27,20 @@ require_once "../common/header.php";
         <div class="card p-2" style="width: 40rem;">
             <div class="card-body">
                 <h5>500,000 / 박</h5>
-                <input type="text" id="datepicker1" class="mb-3">
-                <input type="text" id="datepicker2" class="mb-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>인원</option>
-                    <option value="1">1명</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="3">4명</option>
-                </select>
-                <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                    <button class="btn btn-primary mb-5" type="button">예약하기</button>
-                </div>
+                <form class="reserveFormArray">
+                    <input type="text" id="datepicker1" class="mb-3" name="start_date">
+                    <input type="text" id="datepicker2" class="mb-3" name="end_date">
+                    <select class="form-select" aria-label="Default select example" name="people">
+                        <option selected>인원</option>
+                        <option value="1">1명</option>
+                        <option value="2">2명</option>
+                        <option value="3">3명</option>
+                        <option value="3">4명</option>
+                    </select>
+                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                        <button class="btn btn-primary mb-5" type="submit" onclick="reserveForm()">예약하기</button>
+                    </div>
+                </form>
                 <div class="d-flex">
                     <div class="p-2 w-100">500,000 x 5박</div>
                     <div class="p-2 flex-shrink-1">250000</div>
@@ -60,7 +64,9 @@ require_once "../common/header.php";
         </div>
     </div>
     <?php
-    for ($i = 0; $i < 15; $i++) { ?>
+    for ($i = 0;
+    $i < 15;
+    $i++) { ?>
     <div class="mb-3 mt-3">
         <div class="col-md-4">
             <i class="bi bi-star-fill"></i>
@@ -69,18 +75,18 @@ require_once "../common/header.php";
             <i class="bi bi-star-half"></i>
             <i class="bi bi-star"></i>
         </div>
-            <div class="col-md-8">
-                <span>보송보송</span> |
-                <span>2022.11.03</span>
-            </div>
-            <div>쉬다 갑니다~</div>
+        <div class="col-md-8">
+            <span>보송보송</span> |
+            <span>2022.11.03</span>
+        </div>
+        <div>쉬다 갑니다~</div>
         <hr>
-            <?php
+        <?php
         } ?>
     </div>
     <script>
-        $(function() {
-            var disabledDays = ["2022-11-14","2022-11-15","2013-7-26"];
+        $(function () {
+            var disabledDays = ["2022-11-14", "2022-11-15", "2013-7-26"];
 
             $.datepicker.setDefaults({
                 dateFormat: 'yy-mm-dd',
@@ -98,14 +104,15 @@ require_once "../common/header.php";
                 beforeShowDay: disableAllTheseDays
             });
 
-            $(function() {
+            $(function () {
                 $("#datepicker1, #datepicker2").datepicker();
             });
+
 // 특정일 선택막기
             function disableAllTheseDays(date) {
                 var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
                 for (i = 0; i < disabledDays.length; i++) {
-                    if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+                    if ($.inArray(y + '-' + (m + 1) + '-' + d, disabledDays) != -1) {
                         return [false];
                     }
                 }
