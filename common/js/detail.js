@@ -24,7 +24,7 @@ const selectDay = () => {
         const start = $('.datepicker1').val();
         const end = $('.datepicker2').val();
 
-        const day = getDateDiff(start, end);
+        const day = getDateDiff(start, end) + 1;
         $('._day').text(day);
         $('._pay').text(50000 * day);
 }
