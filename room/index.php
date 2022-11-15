@@ -38,7 +38,7 @@ require_once "../common/header.php";
                         <option value="3">4명</option>
                     </select>
                     <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                        <button class="btn btn-primary mb-5" type="submit" onclick="reserveForm()">예약하기</button>
+                        <button class="btn btn-primary mb-5" type="button" onclick="reserveForm()">예약하기</button>
                     </div>
                 </form>
                 <div class="d-flex">
