@@ -28,9 +28,9 @@ require_once "../common/header.php";
             <div class="card-body">
                 <h5>500,000 / 박</h5>
                 <form class="reserveFormArray">
-                    <input type="text" id="datepicker1" class="mb-3" name="start_date">
-                    <input type="text" id="datepicker2" class="mb-3" name="end_date">
-                    <select class="form-select" aria-label="Default select example" name="people">
+                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date">
+                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date">
+                    <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay();">
                         <option selected>인원</option>
                         <option value="1">1명</option>
                         <option value="2">2명</option>
@@ -42,13 +42,13 @@ require_once "../common/header.php";
                     </div>
                 </form>
                 <div class="d-flex">
-                    <div class="p-2 w-100">500,000 x 5박</div>
-                    <div class="p-2 flex-shrink-1">250000</div>
+                    <div class="p-2 w-100">500,000 x <span class="_day">5</span>박</div>
+                    <div class="p-2 flex-shrink-1 _pay">250000</div>
                 </div>
                 <hr>
                 <div class="d-flex">
                     <div class="p-2 w-100"><h5>총 합계</h5></div>
-                    <div class="p-2 flex-shrink-1">250000</div>
+                    <div class="p-2 flex-shrink-1 _pay">250000</div>
                 </div>
             </div>
         </div>
