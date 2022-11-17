@@ -83,25 +83,25 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                         aria-label="Close"></button>
                 <div class="myform">
                     <h1 class="text-center">회원가입</h1>
-                    <form class="joinFormObject">
+                    <form class="joinFormObject" method="post">
                         <div class="mb-3 mt-4">
                             이메일
                             <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
+                                   aria-describedby="emailHelp" name="email" required>
                         </div>
                         <div class="mb-3 mt-4">
                             이름
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" name="name" required>
                         </div>
                         <div class="mb-3 mt-4">
                             휴대폰 번호
-                            <input type="phone" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" name="phone_number" required>
                         </div>
                         <div class="mb-3">
                             패스워드
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button type="submit" class="btn btn-primary mt-3" onclick="joinForm()">확인</button>

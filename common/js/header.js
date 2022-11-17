@@ -1,5 +1,5 @@
 const loginForm = () => {
-    var formValues = $(".loginFormObject").serializeArray() ;
+    var formValues = $(".loginFormObject").serializeArray();
 
     $.ajax({
         url: "../ajax/login.php",
@@ -12,7 +12,7 @@ const loginForm = () => {
 }
 
 const joinForm = () => {
-    var formValues = $(".joinFormObject").serializeArray() ;
+    var formValues = $(".joinFormObject").serializeArray();
 
     $.ajax({
         url: "../ajax/join.php",
