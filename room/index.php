@@ -40,7 +40,8 @@ $row = $room->getRoomByCode($_GET['code']);
         <div class="card p-2" style="width: 40rem;">
             <div class="card-body">
                 <h5><?=floor($row['price'])?> / 박</h5>
-                <form class="reserveFormArray">
+                <form class="reserveFormArray" method="post">
+                    <input type="hidden" name="room_code" value="<?=$row['room_code']?>">
                     <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date">
                     <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date">
                     <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay(<?=$row['price']?> );">
@@ -50,7 +51,7 @@ $row = $room->getRoomByCode($_GET['code']);
 
                     </select>
                     <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                        <button class="btn btn-primary mb-5" type="button" onclick="reserveForm()">예약하기</button>
+                        <button class="btn btn-primary mb-5" type="submit" onclick="reserveForm()">예약하기</button>
                     </div>
                 </form>
                 <div class="d-flex">

@@ -1,5 +1,5 @@
 const reserveForm = () => {
-    var formValues = $(".reserveFormArray").serializeArray() ;
+    var formValues = $(".reserveFormArray").serializeArray();
 
     $.ajax({
         url: "../ajax/detail/reserve.php",
@@ -7,6 +7,12 @@ const reserveForm = () => {
         data: formValues,
         dataType: "JSON",
         success: function (data) {
+            if (data.msg == 200){
+                alert('예약 완료');
+                location.reload();
+            }else{
+                alert('실패하였습니다.');
+            }
         }
     });
 }
