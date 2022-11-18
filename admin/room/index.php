@@ -34,5 +34,5 @@ $row = $room->getRoom();
 </div>
 </body>
 <?php
-require_once "../common/footer.php";
+require_once "../../common/footer.php";
 ?>
