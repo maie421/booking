@@ -6,6 +6,7 @@ require_once "../common/header.php";
 ?>
 <head>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../../common/js/room.js"></script>
 </head>
 <body>
 <div class="container">
@@ -14,29 +15,29 @@ require_once "../common/header.php";
         <div class="col py-3 bg-white">
 
             <body>
-            <form>
+            <form action="/ajax/room/insertRoom.php" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <label for="exampleFormControlFile1">이미지 선택</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">room</label>
-                    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="이름">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름" name="name" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">주소</label>
-                    <input type="text" class="form-control" id="address_kakao" name="address_detail" readonly />
+                    <input type="text" class="form-control" id="address_kakao" name="address_detail" readonly required/>
                 </div>
                 <div class="form-group  mb-3">
                     <label for="exampleFormControlSelect1">최대 인원</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="최대 인원">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" name="people" placeholder="최대 인원" required>
                 </div>
                 <div class="form-group  mb-3">
                     <label for="exampleFormControlSelect1">가격</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="최대 인원">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" name="price" placeholder="가격" required>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-primary">확인</button>
+                    <button type="submit" class="btn btn-primary">확인</button>
                 </div>
             </form>
             </body>
