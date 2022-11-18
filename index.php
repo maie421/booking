@@ -2,6 +2,10 @@
 
 require_once "common/header.php";
 $type = $_GET['type']?? '';
+
+$room = new ROOM();
+$row = $room->getRoomByType($type);
+
 ?>
     <head>
         <link rel="stylesheet" type="text/css" href="./common/css/card.css">
@@ -30,29 +34,28 @@ $type = $_GET['type']?? '';
         <div class="container">
             <div class="row">
                 <?php
-                for ($i = 0; $i < 10; $i++) { ?>
+                foreach ($row as $key => $value) {?>
                     <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="food-card">
                             <div class="food-card_img">
-                                <img src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-607458038229062130/original/1e20dfc7-ea12-44b2-a837-2bdcd8502133.jpeg?im_w=720"
-                                     alt="">
-                                <i class="bi bi-heart <?=$i?>"  style="color:red" onclick="heartClick('<?=$i?>')"></i>
+                                <img src="./img/room/<?=$value['img']?>" width="720">
+                                <i class="bi bi-heart <?=$value['room_code']?>"  style="color:red" onclick="heartClick('<?=$value['room_code']?>')"></i>
                                 <!--                            <a href="#" ><i class="bi bi-suit-heart-fill" style="color:red"></i></i></a>-->
                             </div>
                             <div class="food-card_content">
                                 <div class="food-card_title-section">
-                                    <a href="/room?code=R20302" class="food-card_title">해운대</a>
+                                    <a href="/room?code=<?=$value['room_code']?>" class="food-card_title"><?=$value['name']?></a>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-half"></i>
                                     <i class="bi bi-star"></i>
-                                    <span">3.5 (3,000)</span>
+                                    <span>3.5 (3,000)</span>
                                 </div>
                                 <div class="food-card_bottom-section">
                                     <div class="space-between">
                                         <div>
-                                            <span class="fa fa-fire"></span> 판매가 30.000
+                                            <span class="fa fa-fire"></span> 판매가 <?=floor($value['price'])?>
                                         </div>
                                         <div class="pull-right">
                                             <span class="badge badge-success">Veg</span>

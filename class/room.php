@@ -20,6 +20,20 @@ class ROOM
             ->limit(1)
             ->get();
     }
+
+    function getRoomByType($room_type = ''){
+        $room = DB_CONNECT::DB()->table('room');
+
+        if(empty($room_type)){
+            return $room->select()
+                ->get();
+        }else{
+            return $room->select()
+                ->where('type', '=', $room_type)
+                ->get();
+        }
+
+    }
 }
 
 
