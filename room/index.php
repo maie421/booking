@@ -1,6 +1,12 @@
 <?php
 
 require_once "../common/header.php";
+
+$room = new ROOM();
+$bookmark = new BOOKMARK();
+
+$row = $room->getRoomByCode($_GET['code']);
+
 ?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -11,44 +17,50 @@ require_once "../common/header.php";
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script>
 
     <script src="../common/js/detail.js"></script>
+    <script src="../common/js/main.js"></script>
 
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-2 mb-4">해운대</h2>
+    <h2 class="mt-2 mb-4"><?=$row['name']?></h2>
     <div class="mb-4">
-        <i class="bi bi-star-fill"></i> 4.8 후기 500개 <i class="bi bi-heart ms-3" style="color:red"></i> 저장
+        <i class="bi bi-star-fill"></i> 4.8 후기 500개
+        <?php if($bookmark->getBookmarkByRoomCode($row['room_code'],'m6377727b479e0')){?>
+            <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
+        <?php }else{ ?>
+            <i class="bi bi-suit-heart-fill <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
+        <?php }?>
+        저장
     </div>
     <div class="d-flex">
         <div class="p-2">
-            <img src="https://a0.muscache.com/im/pictures/94714109/66313f84_original.jpg?im_w=1200"
+            <img src="../img/room/<?=$row['img']?>" width="300" height="150"
                  class="img-thumbnail">
         </div>
         <div class="card p-2" style="width: 40rem;">
             <div class="card-body">
-                <h5>500,000 / 박</h5>
+                <h5><?=floor($row['price'])?> / 박</h5>
                 <form class="reserveFormArray">
                     <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date">
                     <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date">
-                    <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay();">
-                        <option selected>인원</option>
-                        <option value="1">1명</option>
-                        <option value="2">2명</option>
-                        <option value="3">3명</option>
-                        <option value="3">4명</option>
+                    <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay(<?=$row['price']?> );">
+                        <?php for ($i = 1; $i <= $row['max_people']; $i++){?>
+                            <option value="<?=$i?>"><?=$i?>명</option>
+                        <?php }?>
+
                     </select>
                     <div class="d-grid gap-2 col-6 mx-auto mt-3">
                         <button class="btn btn-primary mb-5" type="button" onclick="reserveForm()">예약하기</button>
                     </div>
                 </form>
                 <div class="d-flex">
-                    <div class="p-2 w-100">500,000 x <span class="_day">5</span>박</div>
-                    <div class="p-2 flex-shrink-1 _pay">250000</div>
+                    <div class="p-2 w-100"><?=floor($row['price'])?> x <span class="_day">0</span>박</div>
+                    <div class="p-2 flex-shrink-1 _pay">0</div>
                 </div>
                 <hr>
                 <div class="d-flex">
                     <div class="p-2 w-100"><h5>총 합계</h5></div>
-                    <div class="p-2 flex-shrink-1 _pay">250000</div>
+                    <div class="p-2 flex-shrink-1 _pay">0</div>
                 </div>
             </div>
         </div>
@@ -63,10 +75,7 @@ require_once "../common/header.php";
             <button type="button" class="btn btn-outline-primary mt-3 ">작성하기</button>
         </div>
     </div>
-    <?php
-    for ($i = 0;
-    $i < 15;
-    $i++) { ?>
+    <?php for ($i = 0;$i < 15;$i++) { ?>
     <div class="mb-3 mt-3">
         <div class="col-md-4">
             <i class="bi bi-star-fill"></i>
@@ -81,8 +90,7 @@ require_once "../common/header.php";
         </div>
         <div>쉬다 갑니다~</div>
         <hr>
-        <?php
-        } ?>
+        <?php } ?>
     </div>
     <script>
         $(function () {
