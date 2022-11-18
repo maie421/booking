@@ -11,7 +11,6 @@ $row = $room->getRoomByCode($room_code);
 ?>
 <head>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="../../common/js/room.js"></script>
 </head>
 <body>
 <div class="container">

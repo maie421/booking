@@ -1,17 +1,16 @@
-const addRoom = () => {
-    var formValues = $(".roomFormArray").serializeArray();
-
-    console.log(formValues);
-    // formValues.push($(".form-control-file")[0].files[0])
-
+const deleteRoom = (code) => {
     $.ajax({
-        url: "/ajax/room/insertRoom.php",
-        type: "POST",
-        enctype: 'multipart/form-data',
-        data: {formValues, 'file': $(".form-control-file")[0].files[0]},
+        url: "/ajax/room/deleteRoom.php",
+        type: "get",
+        data: {code},
         dataType: "JSON",
         success: function (data) {
-
+            if (data.msg == 200){
+               alert('성공하였습니다');
+               location.reload();
+            }else{
+                alert('실패하였습니다.');
+            }
         }
     });
 }
