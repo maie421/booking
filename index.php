@@ -44,7 +44,7 @@ $row = $room->getRoomByType($type);
                             </div>
                             <div class="food-card_content">
                                 <div class="food-card_title-section">
-                                    <a href="/room?code=<?=$value['room_code']?>" class="food-card_title"><?=$value['name']?></a>
+                                    <a href="/room?code=<?=$value['room_code']?>" class="food-card_title"> <?=$value['name']?> </a>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
