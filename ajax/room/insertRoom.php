@@ -24,6 +24,7 @@ try {
     $room->insert(
         [
             'room_code' => uniqid('r'),
+            'name' => $_POST['name'],
             'address' => $_POST['address_detail'],
             'max_people' => $_POST['people'],
             'price' => $_POST['price'],
