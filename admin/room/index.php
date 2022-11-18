@@ -24,7 +24,7 @@ $row = $room->getRoom();
                         <h5><?= $value['name'] ?></h5>
                         <p class="card-text">최대 인원 : <?= $value['max_people'] ?>명 </p>
                         <p class="card-text">가격 : <?= floor($value['price']) ?> /박</p>
-                        <a href="add.php" type="button" class="btn btn-outline-dark me-2">수정</a>
+                        <a href="edit.php/?code=<?=$value['room_code']?>" type="button" class="btn btn-outline-dark me-2">수정</a>
                         <a type="button" class="btn btn-outline-dark">삭제</a>
                     </div>
                 </div>
