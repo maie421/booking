@@ -25,7 +25,7 @@ $row = $room->getRoomByCode($_GET['code']);
     <h2 class="mt-2 mb-4"><?=$row['name']?></h2>
     <div class="mb-4">
         <i class="bi bi-star-fill"></i> 4.8 후기 500개
-        <?php if($bookmark->getBookmarkByRoomCode($row['room_code'],'m6377727b479e0')){?>
+        <?php if(!$bookmark->getBookmarkByRoomCode($row['room_code'],'m6377727b479e0')){?>
             <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
         <?php }else{ ?>
             <i class="bi bi-suit-heart-fill <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
