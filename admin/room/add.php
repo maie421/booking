@@ -25,6 +25,14 @@ require_once "../common/header.php";
                     <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름" name="name" required>
                 </div>
                 <div class="form-group mb-3">
+                    <label>종류</label>
+                    <select class="form-select" name="type">
+                        <option value="hotel" selected>호텔</option>
+                        <option value="motel">모텔</option>
+                        <option value="pension" >펜션</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">주소</label>
                     <input type="text" class="form-control" id="address_kakao" name="address_detail" readonly required/>
                 </div>

@@ -30,6 +30,14 @@ $row = $room->getRoomByCode($room_code);
                     <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름" name="name" value="<?=$row['name']?>" required>
                 </div>
                 <div class="form-group mb-3">
+                    <label>종류</label>
+                    <select class="form-select" name="type">
+                        <option value="hotel" <?=$row['type'] == 'hotel' ? 'selected': '' ?>>호텔</option>
+                        <option value="motel" <?=$row['type'] == 'motel' ? 'selected': '' ?>>모텔</option>
+                        <option value="pension" <?=$row['type'] == 'pension' ? 'selected': '' ?>>펜션</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">주소</label>
                     <input type="text" class="form-control" id="address_kakao" name="address_detail" readonly required value="<?=$row['address']?>"/>
                 </div>

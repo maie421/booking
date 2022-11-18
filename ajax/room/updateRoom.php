@@ -31,6 +31,7 @@ try {
         ->set('max_people', $_POST['people'])
         ->set('price', $_POST['price'])
         ->set('img', $_POST['img'])
+        ->set('type', $_POST['type'])
         ->where('room_code', $_POST['room_code'])
         ->execute();
 

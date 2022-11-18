@@ -30,7 +30,8 @@ try {
             'price' => $_POST['price'],
             'create_date' => date("Y-m-d H:i:s"),
             'img' => $img_name,
-            'member_code' => 'm6377727b479e0'
+            'member_code' => 'm6377727b479e0',
+            'type' => $_POST['type'],
         ]
     )->execute();
 
