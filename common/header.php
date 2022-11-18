@@ -53,7 +53,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                         aria-label="Close"></button>
                 <div>
                     <h1 class="text-center">로그인</h1>
-                    <form class="loginFormObject">
+                    <form class="loginFormObject" method="post" action= "../ajax/login.php">
                         <div class="mb-3 mt-4">
                             이메일
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1"
@@ -64,7 +64,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-                            <button type="button" class="btn btn-primary mt-3" onclick="loginForm()">로그인</button>
+                            <button type="submit" class="btn btn-primary mt-3">로그인</button>
                         </div>
                     </form>
                 </div>
