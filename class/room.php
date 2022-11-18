@@ -22,17 +22,17 @@ class ROOM
     }
 
     function getRoomByType($room_type = ''){
-        $room = DB_CONNECT::DB()->table('room');
-
         if(empty($room_type)){
-            return $room->select()
-                ->get();
+            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code, r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code");
+            $stmt->bindValue(":member_code", "m6377727b479e0");
         }else{
-            return $room->select()
-                ->where('type', '=', $room_type)
-                ->get();
+            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code ,r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code where r.type = :type");
+            $stmt->bindValue(":member_code", "m6377727b479e0");
+            $stmt->bindValue(":type", $room_type);
         }
+        $stmt->execute();
 
+        return $stmt->fetchAll();
     }
 }
 

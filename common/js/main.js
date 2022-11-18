@@ -4,7 +4,7 @@ const heartClick = (code) => {
         type: "POST",
         data: {code: code},
         dataType: "JSON",
-        success: function () {
+        success: function (data) {
             if ($(`.${code}`).hasClass('bi-heart')){
                 console.log(333);
                 $(`.bi-heart.${code}`).addClass('bi-suit-heart-fill');
