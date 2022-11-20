@@ -19,7 +19,12 @@ try {
         echo '<script language="javascript">';
         echo "alert('성공하였습니다')";
         echo '</script>';
-        echo "<script> location.href = '/admin' </script>";
+        if($_POST['page_type'] == "mypage"){
+            echo "<script> location.href = '/mypage/booking.php' </script>";
+        }else {
+            echo "<script> location.href = '/admin' </script>";
+        }
+
     } else {
         echo '<script language="javascript">';
         echo "alert('$msg')";

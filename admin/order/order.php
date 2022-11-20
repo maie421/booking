@@ -9,6 +9,7 @@
             padding-right: 1em;
         }
     </style>
+    <script src="../../common/js/booking.js"></script>
 </head>
 <body>
 <?php
@@ -35,7 +36,7 @@ $booking_full = $booking->getBookingByRoomMemberCode( "m6377727b479e0");
                 <p class="card-text">예약 기간 : <?= date("Y-m-d", strtotime($value['start_date'])) ?> ~ <?= date("Y-m-d", strtotime($value['end_date'])) ?></p>
                 <div class="d-flex bd-highlight">
                     <a href="/admin/order/modify.php?code=<?=$value['booking_code']?>" type="button" class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
-                    <a type="button" class="btn btn-outline-dark mr-3">예약 취소</a>
+                    <a type="button" class="btn btn-outline-dark mr-3" onclick="deleteBooking('<?=$value['booking_code']?>')">예약 취소</a>
                 </div>
             </div>
         </div>
