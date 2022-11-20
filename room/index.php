@@ -42,8 +42,8 @@ $row = $room->getRoomByCode($_GET['code']);
                 <h5><?=floor($row['price'])?> / 박</h5>
                 <form class="reserveFormArray" method="post">
                     <input type="hidden" name="room_code" value="<?=$row['room_code']?>">
-                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date">
-                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date">
+                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly>
+                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly>
                     <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay(<?=$row['price']?> );">
                         <?php for ($i = 1; $i <= $row['max_people']; $i++){?>
                             <option value="<?=$i?>"><?=$i?>명</option>
