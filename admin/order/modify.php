@@ -1,6 +1,12 @@
 <?php
 
 require_once "../common/header.php";
+
+$booking = new BOOKING();
+$room = new ROOM();
+
+$booking_date = $booking->getBookingByCode($_GET['code']);
+$room_date = $room->getRoomByCode($booking_date['room_code']);
 ?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,17 +22,17 @@ require_once "../common/header.php";
             <form>
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1">room</label>
-                    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="이름">
+                    <br><?=$room_date['name']?>
                 </div>
                 <div class="form-group  mb-3">
                     <label for="exampleFormControlSelect1">인원</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원">
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원" value="<?=$booking_date['people']?>">
                 </div>
                 <div class="form-group  mb-3">
                     <label for="exampleFormControlSelect1">가간</label>
                     <div class="form-group d-flex bd-highlight">
-                        <input type="text" class="form-control mb-3" id="datepicker1" placeholder="2022-11-14">
-                        <input type="text" class="form-control mb-3" id="datepicker2" placeholder="2022-11-14">
+                        <input type="text" class="form-control mb-3" id="datepicker1" placeholder="<?=date("Y-m-d", strtotime($booking_date['start_date']))?>">
+                        <input type="text" class="form-control mb-3" id="datepicker2" placeholder="<?=date("Y-m-d", strtotime($booking_date['end_date']))?>">
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
