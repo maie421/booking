@@ -4,8 +4,18 @@ require_once "../common/header.php";
 
 $room = new ROOM();
 $bookmark = new BOOKMARK();
+$booking = new BOOKING();
 
 $row = $room->getRoomByCode($_GET['code']);
+$booking_data = $booking->getBookingByRoomCode($_GET['code']);
+
+$disabled_days = [];
+foreach ($booking_data as $booking) {
+    $start_date = date("Y-m-d", strtotime($booking['start_date']));
+    $end_date = date("Y-m-d", strtotime($booking['end_date']));
+
+    $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
+}
 
 ?>
 <head>
@@ -22,32 +32,41 @@ $row = $room->getRoomByCode($_GET['code']);
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-2 mb-4"><?=$row['name']?></h2>
+    <h2 class="mt-2 mb-4"><?= $row['name'] ?></h2>
     <div class="mb-4">
         <i class="bi bi-star-fill"></i> 4.8 후기 500개
-        <?php if(!$bookmark->getBookmarkByRoomCode($row['room_code'],'m6377727b479e0')){?>
-            <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
-        <?php }else{ ?>
-            <i class="bi bi-suit-heart-fill <?= $row['room_code'] ?>" style="color:red" onclick="heartClick('<?= $row['room_code'] ?>')"></i>
-        <?php }?>
+        <?php
+        if (!$bookmark->getBookmarkByRoomCode($row['room_code'], 'm6377727b479e0')) { ?>
+            <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red"
+               onclick="heartClick('<?= $row['room_code'] ?>')"></i>
+        <?php
+        } else { ?>
+            <i class="bi bi-suit-heart-fill <?= $row['room_code'] ?>" style="color:red"
+               onclick="heartClick('<?= $row['room_code'] ?>')"></i>
+        <?php
+        } ?>
         저장
     </div>
     <div class="d-flex">
         <div class="p-2">
-            <img src="../img/room/<?=$row['img']?>" width="300" height="150"
+            <img src="../img/room/<?= $row['img'] ?>" width="300" height="150"
                  class="img-thumbnail">
         </div>
         <div class="card p-2" style="width: 40rem;">
             <div class="card-body">
-                <h5><?=floor($row['price'])?> / 박</h5>
+                <h5><?= floor($row['price']) ?> / 박</h5>
                 <form class="reserveFormArray" method="post">
-                    <input type="hidden" name="room_code" value="<?=$row['room_code']?>">
+                    <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
+                    <input type="hidden" name="member_code" value="<?= $row['member_code'] ?>">
                     <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly>
                     <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly>
-                    <select class="form-select" aria-label="Default select example" name="people" onclick="selectDay(<?=$row['price']?> );">
-                        <?php for ($i = 1; $i <= $row['max_people']; $i++){?>
-                            <option value="<?=$i?>"><?=$i?>명</option>
-                        <?php }?>
+                    <select class="form-select" aria-label="Default select example" name="people"
+                            onclick="selectDay(<?= $row['price'] ?> );">
+                        <?php
+                        for ($i = 1; $i <= $row['max_people']; $i++) { ?>
+                            <option value="<?= $i ?>"><?= $i ?>명</option>
+                        <?php
+                        } ?>
 
                     </select>
                     <div class="d-grid gap-2 col-6 mx-auto mt-3">
@@ -55,7 +74,7 @@ $row = $room->getRoomByCode($_GET['code']);
                     </div>
                 </form>
                 <div class="d-flex">
-                    <div class="p-2 w-100"><?=floor($row['price'])?> x <span class="_day">0</span>박</div>
+                    <div class="p-2 w-100"><?= floor($row['price']) ?> x <span class="_day">0</span>박</div>
                     <div class="p-2 flex-shrink-1 _pay">0</div>
                 </div>
                 <hr>
@@ -76,7 +95,10 @@ $row = $room->getRoomByCode($_GET['code']);
             <button type="button" class="btn btn-outline-primary mt-3 ">작성하기</button>
         </div>
     </div>
-    <?php for ($i = 0;$i < 15;$i++) { ?>
+    <?php
+    for ($i = 0;
+    $i < 15;
+    $i++) { ?>
     <div class="mb-3 mt-3">
         <div class="col-md-4">
             <i class="bi bi-star-fill"></i>
@@ -91,11 +113,12 @@ $row = $room->getRoomByCode($_GET['code']);
         </div>
         <div>쉬다 갑니다~</div>
         <hr>
-        <?php } ?>
+        <?php
+        } ?>
     </div>
     <script>
         $(function () {
-            var disabledDays = ["2022-11-14", "2022-11-15", "2013-7-26"];
+            var disabledDays = <?= json_encode($disabled_days) ?>
 
             $.datepicker.setDefaults({
                 dateFormat: 'yy-mm-dd',

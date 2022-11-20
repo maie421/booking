@@ -11,6 +11,7 @@ try {
             'start_date' => $_POST['start_date'],
             'end_date' => $_POST['end_date'].' 23:59:59',
             'people' => $_POST['people'],
+            'room_member_code' => $_POST['member_code'],
         ]
     )->execute();
     throw new Exception('200');

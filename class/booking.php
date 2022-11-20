@@ -46,6 +46,15 @@ class BOOKING
             ->where('member_code', '=', $member_code)
             ->get();
     }
+
+    function getBookingByRoomCode($room_code)
+    {
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select()
+            ->where('room_code', '=', $room_code)
+            ->get();
+    }
 }
 
 ?>
