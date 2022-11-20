@@ -22,12 +22,12 @@ $booking_data = $booking->getBookingByMemberCode("m6377727b479e0");
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="../img/room/<?= $room_date['img'] ?>"
-                                     class="img-fluid rounded-start" alt="...">
+                                     class="img-fluid rounded-start" alt="삭제된 이미지">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $room_date['name'] ?></h5>
-                                    <p class="card-text"><small class="text-muted"><?= $room_date['type'] ?></small></p>
+                                    <h5 class="card-title"><?= $room_date['name'] ?? '삭제된 룸입니다.' ?></h5>
+                                    <p class="card-text"><small class="text-muted"><?= $room_date['type'] ?? '삭제된 룸입니다.'?></small></p>
                                     <p class="card-text"><?= date("Y-m-d", strtotime($value['start_date'])) ?>
                                         ~ <?= date("Y-m-d", strtotime($value['end_date'])) ?></p>
                                 </div>
