@@ -7,6 +7,15 @@ $room = new ROOM();
 
 $booking_date = $booking->getBookingByCode($_GET['code']);
 $room_date = $room->getRoomByCode($booking_date['room_code']);
+$except_booking_data = $booking->getExceptBookingByRoom($booking_date['room_code'],$_GET['code']);
+
+$disabled_days = [];
+foreach ($except_booking_data ?? [] as $except_booking) {
+    $start_date = date("Y-m-d", strtotime($except_booking['start_date']));
+    $end_date = date("Y-m-d", strtotime($except_booking['end_date']));
+
+    $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
+}
 ?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -51,7 +60,7 @@ $room_date = $room->getRoomByCode($booking_date['room_code']);
 </body>
 <script>
     $(function () {
-        var disabledDays = ["2022-11-14", "2022-11-15", "2013-7-26"];
+        var disabledDays = <?= json_encode($disabled_days) ?>
 
         $.datepicker.setDefaults({
             dateFormat: 'yy-mm-dd',
@@ -62,8 +71,7 @@ $room_date = $room->getRoomByCode($booking_date['room_code']);
             dayNames: ['일', '월', '화', '수', '목', '금', '토'],
             dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
             dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            minDate: new Date(2022, 4 - 1, 1),
-            maxDate: new Date(2022, 11 - 1, 31),
+            minDate: new Date(),
             showMonthAfterYear: true,
             yearSuffix: '년',
             beforeShowDay: disableAllTheseDays

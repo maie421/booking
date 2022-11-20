@@ -13,7 +13,7 @@ $booking_data = $booking->getBookingByRoomCode($_GET['code']);
 $command_data = $command->getRoomByRoom($_GET['code']);
 
 $disabled_days = [];
-foreach ($booking_data as $booking) {
+foreach ($booking_data ?? [] as $booking) {
     $start_date = date("Y-m-d", strtotime($booking['start_date']));
     $end_date = date("Y-m-d", strtotime($booking['end_date']));
 
@@ -135,8 +135,7 @@ foreach ($booking_data as $booking) {
                 dayNames: ['일', '월', '화', '수', '목', '금', '토'],
                 dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                minDate: new Date(2022, 4 - 1, 1),
-                maxDate: new Date(2022, 11 - 1, 31),
+                minDate: new Date(),
                 showMonthAfterYear: true,
                 yearSuffix: '년',
                 beforeShowDay: disableAllTheseDays

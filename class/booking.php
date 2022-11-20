@@ -55,6 +55,15 @@ class BOOKING
             ->where('room_code', '=', $room_code)
             ->get();
     }
+
+    function getExceptBookingByRoom($room_code, $booking_code){
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select()
+            ->where('room_code', '=', $room_code)
+            ->where('booking_code', '!=', $booking_code)
+            ->get();
+    }
 }
 
 ?>
