@@ -25,10 +25,10 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
         <a href="/"><img src="../img/logo.png" height="100" width="150"/></a>
         <div class="align-self-center">
             <div class="input-group  mx-sm-3">
-                <input type="text" class="form-control" placeholder="검색 시작하기"
-                       aria-label="검색 시작하기"
-                       aria-describedby="basic-addon2">
-                <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+<!--                <input type="text" class="form-control" placeholder="검색"-->
+<!--                       aria-label="검색 시작하기"-->
+<!--                       aria-describedby="basic-addon2">-->
+<!--                <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>-->
             </div>
         </div>
         <div class="align-self-center">
