@@ -33,6 +33,7 @@ $booking_data = $booking->getBookingByMemberCode("m6377727b479e0");
                                 </div>
                             </div>
                         </div>
+                        <?php if (date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d")) { ?>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <div class="d-flex bd-highlight">
                                 <a href="/mypage/edit.php?code=<?= $value['booking_code'] ?>" type="button"
@@ -41,6 +42,7 @@ $booking_data = $booking->getBookingByMemberCode("m6377727b479e0");
                                    onclick="deleteBooking('<?= $value['booking_code'] ?>')">예약 취소</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <?php
                 } ?>
