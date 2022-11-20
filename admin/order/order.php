@@ -28,21 +28,23 @@ $booking = new BOOKING();
 $member = new MEMBER();
 
 $date = $_GET['date'] ?? '';
-$booking_date = $booking->getBookingByDay($_GET['date']);
+if(!empty($date)){
+    $booking_date = $booking->getBookingByDay($_GET['date']);
+}
 
 ?>
 <div class="d-flex bd-highlight">
     <div class="p-2 bd-highligh" style="width:80%;" id="calendar"></div>
     <div class="d-flex flex-column bd-highlight mb-3">
         <?php
-        foreach ($booking_date as $value){
+        foreach ($booking_date ?? [] as $value){
             $member_date = $member->getMemberByCode($value['member_code']);?>
         <div class="card mb-3" style="width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title"><?=$value['name']?></h5>
                 <p class="card-text"><?=$member_date['name']?></p>
                 <p class="card-text"><?=$member_date['phone_number']?></p>
-                <p class="card-text">예약 기간 : <?=$value['start_date' ]?> ~ <?=$value['end_date']?></p>
+                <p class="card-text">예약 기간 : <?= date("Y-m-d", strtotime($value['start_date'])) ?> ~ <?= date("Y-m-d", strtotime($value['end_date'])) ?></p>
                 <div class="d-flex bd-highlight">
                     <a href="/admin/order/modify.php?code=<?=$value['booking_code']?>" type="button" class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
                     <a type="button" class="btn btn-outline-dark mr-3">예약 취소</a>

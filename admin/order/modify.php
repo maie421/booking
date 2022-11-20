@@ -18,28 +18,33 @@ $room_date = $room->getRoomByCode($booking_date['room_code']);
     <div class="row flex-nowrap">
         <?php
         include_once "../common/navebar.php" ?>
-        <div class="col py-3 bg-white">
-            <form>
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1">room</label>
-                    <br><?=$room_date['name']?>
-                </div>
-                <div class="form-group  mb-3">
-                    <label for="exampleFormControlSelect1">인원</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원" value="<?=$booking_date['people']?>">
-                </div>
-                <div class="form-group  mb-3">
-                    <label for="exampleFormControlSelect1">가간</label>
-                    <div class="form-group d-flex bd-highlight">
-                        <input type="text" class="form-control mb-3" id="datepicker1" placeholder="<?=date("Y-m-d", strtotime($booking_date['start_date']))?>">
-                        <input type="text" class="form-control mb-3" id="datepicker2" placeholder="<?=date("Y-m-d", strtotime($booking_date['end_date']))?>">
+            <div class="col py-3 bg-white">
+                <form action="/ajax/booking/updateBooking.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="booking_code"
+                           value="<?= $booking_date['booking_code'] ?>">
+                    <div class="form-group mb-3">
+                        <label for="exampleFormControlInput1">room</label>
+                        <br><?= $room_date['name'] ?>
                     </div>
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-primary">확인</button>
-                </div>
-            </form>
-        </div>
+                    <div class="form-group  mb-3">
+                        <label for="exampleFormControlSelect1">인원</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="인원" name="people"
+                               value="<?= $booking_date['people'] ?>">
+                    </div>
+                    <div class="form-group  mb-3">
+                        <label for="exampleFormControlSelect1">가간</label>
+                        <div class="form-group d-flex bd-highlight">
+                            <input type="text" class="form-control mb-3" id="datepicker1"
+                                    name="start_date" value="<?= date("Y-m-d", strtotime($booking_date['start_date'])) ?>">
+                            <input type="text" class="form-control mb-3" id="datepicker2"
+                                    name="end_date" value="<?= date("Y-m-d", strtotime($booking_date['end_date'])) ?>">
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">확인</button>
+                    </div>
+                </form>
+            </div>
     </div>
 </div>
 </body>
