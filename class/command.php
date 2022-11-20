@@ -11,6 +11,14 @@ class COMMAND
             ->where('room_code', '=', $room_code)
             ->get();
     }
+
+    function getCountRoomByRoom($room_code){
+        $room = DB_CONNECT::DB()->table('command');
+
+        return $room->select()
+            ->where('room_code', '=', $room_code)
+            ->count();
+    }
 }
 
 

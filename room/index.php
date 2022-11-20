@@ -37,7 +37,7 @@ foreach ($booking_data ?? [] as $booking) {
 <div class="container">
     <h2 class="mt-2 mb-4"><?= $row['name'] ?></h2>
     <div class="mb-4">
-        <i class="bi bi-star-fill"></i> 4.8 후기 500개
+<!--        <i class="bi bi-star-fill"></i> 4.8 후기 500개-->
         <?php
         if (!$bookmark->getBookmarkByRoomCode($row['room_code'], 'm6377727b479e0')) { ?>
             <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red"

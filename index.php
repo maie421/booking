@@ -4,6 +4,7 @@ require_once "common/header.php";
 $type = $_GET['type'] ?? '';
 
 $room = new ROOM();
+$command = new COMMAND();
 $row = $room->getRoomByType($type);
 ?>
     <head>
@@ -34,6 +35,7 @@ $row = $room->getRoomByType($type);
             <div class="row">
                 <?php
                 foreach ($row as $value){
+                    $command_count = $command->getCountRoomByRoom($value['room_code']);
                 ?>
 
                     <div class="col-sm-6 col-md-6 col-lg-4">
@@ -57,7 +59,7 @@ $row = $room->getRoomByType($type);
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-half"></i>
                                     <i class="bi bi-star"></i>
-                                    <span>3.5 (3,000)</span>
+                                    <span>3.5 (<?=$command_count?>)</span>
                                 </div>
                                 <div class="food-card_bottom-section">
                                     <div class="space-between">
