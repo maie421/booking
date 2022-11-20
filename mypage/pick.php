@@ -25,12 +25,12 @@ $booking_date = $bookmark->getBookmark();
                                onclick="heartClick('<?= $value['room_code'] ?>')"></i>
                         </div>
                         <h5 class="card-title"><?= $room_date['name'] ?></h5>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                        <i class="bi bi-star"></i>
-                        <span">3.5 (3,000)</span>
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-fill"></i>-->
+<!--                        <i class="bi bi-star-half"></i>-->
+<!--                        <i class="bi bi-star"></i>-->
+<!--                        <span">3.5 (3,000)</span>-->
                         <p class="card-text"><small class="text-muted">펜션</small></p>
                         <small class="text-muted">가격 : <?= floor($room_date['price']) ?></small>
                     </div>

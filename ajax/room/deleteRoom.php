@@ -7,6 +7,16 @@ try {
         ->where('room_code', $_GET['code'])
         ->execute();
 
+    $book_mark = DB_CONNECT::DB()->table('bookmark');
+    $book_mark->delete()
+        ->where('room_code', $_GET['code'])
+        ->execute();
+
+    $command = DB_CONNECT::DB()->table('command');
+    $command->delete()
+        ->where('room_code', $_GET['code'])
+        ->execute();
+
     throw new Exception('200');
 } catch(Exception $e){
     $msg = $e->getMessage();

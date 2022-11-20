@@ -107,11 +107,11 @@ foreach ($booking_data ?? [] as $booking) {
     ?>
     <div class="mb-3 mt-3">
         <div class="col-md-4">
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-half"></i>
-            <i class="bi bi-star"></i>
+<!--            <i class="bi bi-star-fill"></i>-->
+<!--            <i class="bi bi-star-fill"></i>-->
+<!--            <i class="bi bi-star-fill"></i>-->
+<!--            <i class="bi bi-star-half"></i>-->
+<!--            <i class="bi bi-star"></i>-->
         </div>
         <div class="col-md-8">
             <span><?= $member_data['name'] ?></span> |

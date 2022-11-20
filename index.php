@@ -54,12 +54,12 @@ $row = $room->getRoomByType($type);
                                 <div class="food-card_title-section">
                                     <a href="/room?code=<?= $value['room_code'] ?>"
                                        class="food-card_title"> <?= $value['name'] ?> </a>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i>
-                                    <i class="bi bi-star"></i>
-                                    <span>3.5 (<?=$command_count?>)</span>
+<!--                                    <i class="bi bi-star-fill"></i>-->
+<!--                                    <i class="bi bi-star-fill"></i>-->
+<!--                                    <i class="bi bi-star-fill"></i>-->
+<!--                                    <i class="bi bi-star-half"></i>-->
+<!--                                    <i class="bi bi-star"></i>-->
+                                    <span>(<?=$command_count?>)</span>
                                 </div>
                                 <div class="food-card_bottom-section">
                                     <div class="space-between">
