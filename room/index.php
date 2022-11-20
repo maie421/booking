@@ -5,9 +5,12 @@ require_once "../common/header.php";
 $room = new ROOM();
 $bookmark = new BOOKMARK();
 $booking = new BOOKING();
+$command = new COMMAND();
+$member = new MEMBER();
 
 $row = $room->getRoomByCode($_GET['code']);
 $booking_data = $booking->getBookingByRoomCode($_GET['code']);
+$command_data = $command->getRoomByRoom($_GET['code']);
 
 $disabled_days = [];
 foreach ($booking_data as $booking) {
@@ -39,11 +42,11 @@ foreach ($booking_data as $booking) {
         if (!$bookmark->getBookmarkByRoomCode($row['room_code'], 'm6377727b479e0')) { ?>
             <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red"
                onclick="heartClick('<?= $row['room_code'] ?>')"></i>
-        <?php
+            <?php
         } else { ?>
             <i class="bi bi-suit-heart-fill <?= $row['room_code'] ?>" style="color:red"
                onclick="heartClick('<?= $row['room_code'] ?>')"></i>
-        <?php
+            <?php
         } ?>
         저장
     </div>
@@ -65,7 +68,7 @@ foreach ($booking_data as $booking) {
                         <?php
                         for ($i = 1; $i <= $row['max_people']; $i++) { ?>
                             <option value="<?= $i ?>"><?= $i ?>명</option>
-                        <?php
+                            <?php
                         } ?>
 
                     </select>
@@ -89,16 +92,19 @@ foreach ($booking_data as $booking) {
     <div id="map" class="d-flex p-2 " style="height: 450px;"></div>
     <h4 class="mt-5 mb-5">후기</h4>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">후기 작성</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-outline-primary mt-3 ">작성하기</button>
-        </div>
+        <form action="/ajax/command/insertCommand.php" method="post">
+            <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
+            <label for="exampleFormControlTextarea1" class="form-label">후기 작성</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="command"></textarea>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
+            </div>
+        </form>
     </div>
     <?php
-    for ($i = 0;
-    $i < 15;
-    $i++) { ?>
+    foreach ($command_data ?? [] as $data) {
+    $member_data = $member->getMemberByCode($data['member_code']);
+    ?>
     <div class="mb-3 mt-3">
         <div class="col-md-4">
             <i class="bi bi-star-fill"></i>
@@ -108,10 +114,10 @@ foreach ($booking_data as $booking) {
             <i class="bi bi-star"></i>
         </div>
         <div class="col-md-8">
-            <span>보송보송</span> |
-            <span>2022.11.03</span>
+            <span><?= $member_data['name'] ?></span> |
+            <span><?= $data['create_date'] ?></span>
         </div>
-        <div>쉬다 갑니다~</div>
+        <div><?= $data['command'] ?>~</div>
         <hr>
         <?php
         } ?>
