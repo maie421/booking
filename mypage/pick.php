@@ -15,7 +15,7 @@ $booking_date = $bookmark->getBookmark();
         <div class="card mb-3 me-3" style="max-width: 500px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="https://a0.muscache.com/im/pictures/d1a99b61-8e3c-4b27-a083-03203bbd42de.jpg"
+                    <img src="../img/room/<?= $room_date['img'] ?>"
                          class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
