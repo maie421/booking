@@ -29,11 +29,20 @@ class BOOKING
             ->get();
     }
 
-    function getBookingByMemberCode($member_code)
+    function getBookingByRoomMemberCode($member_code)
     {
         $booking = DB_CONNECT::DB()->table('booking');
 
         return $booking->select(['room_code', 'start_date as start', 'end_date as end'])
+            ->where('room_member_code', '=', $member_code)
+            ->get();
+    }
+
+    function getBookingByMemberCode($member_code)
+    {
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select()
             ->where('member_code', '=', $member_code)
             ->get();
     }
