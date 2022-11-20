@@ -9,11 +9,10 @@ try {
             'member_code' => 'm6377727b479e0',
             'room_code' => $_POST['room_code'],
             'start_date' => $_POST['start_date'],
-            'end_date' => $_POST['end_date'],
+            'end_date' => $_POST['end_date'].' 23:59:59',
             'people' => $_POST['people'],
         ]
     )->execute();
-
     throw new Exception('200');
 } catch(Exception $e){
     $msg = $e->getMessage();

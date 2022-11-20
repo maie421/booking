@@ -2,7 +2,7 @@ const reserveForm = () => {
     var formValues = $(".reserveFormArray").serializeArray();
 
     $.ajax({
-        url: "../ajax/detail/reserve.php",
+        url: "../ajax/booking/insertBooking.php",
         type: "POST",
         data: formValues,
         dataType: "JSON",

@@ -3,23 +3,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
     <style>
-        .fc h2 {
-            font-size: 25px;
-            font-weight:bold;
-            margin-right:10px;
+        .fc-header-toolbar {
+            padding-top: 1em;
+            padding-left: 1em;
+            padding-right: 1em;
         }
-        .fc .fc-toolbar>*>* {
-            float: left;
-            margin-left: 0.75em;
-            display: -webkit-inline-box;
-        }
-        .fc-head {
-            background-color: bisque;
-            line-height: 50px;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        .fc-content{font-size:18px; background-color:black;}
     </style>
 </head>
 <body>
@@ -31,7 +19,7 @@ $date = $_GET['date'] ?? '';
 if(!empty($date)){
     $booking_date = $booking->getBookingByDay($_GET['date']);
 }
-
+$booking_full = $booking->getBookingByMemberCode( "m6377727b479e0");
 ?>
 <div class="d-flex bd-highlight">
     <div class="p-2 bd-highligh" style="width:80%;" id="calendar"></div>
@@ -72,22 +60,10 @@ if(!empty($date)){
                 location.href = `/admin/?date=${start.format()}`
             },
             editable:true,
-            eventResize:function(event)
-            {
-                var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-                var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-                var title = event.title;
-                var id = event.id;
-                $.ajax({
-                    url:"update.php",
-                    type:"POST",
-                    data:{title:title, start:start, end:end, id:id},
-                    success:function(){
-                        calendar.fullCalendar('refetchEvents');
-                        alert('Event Update');
-                    }
-                })
-            },
+            // 이벤트
+            events:
+                <?=json_encode($booking_full)?>
+
 
         });
     });

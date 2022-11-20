@@ -19,12 +19,22 @@ class BOOKING
         return $stmt->fetchAll();
     }
 
-    function getBookingByCode($booking_code){
+    function getBookingByCode($booking_code)
+    {
         $booking = DB_CONNECT::DB()->table('booking');
 
         return $booking->select()
             ->where('booking_code', '=', $booking_code)
             ->limit(1)
+            ->get();
+    }
+
+    function getBookingByMemberCode($member_code)
+    {
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select(['room_code', 'start_date as start', 'end_date as end'])
+            ->where('member_code', '=', $member_code)
             ->get();
     }
 }
