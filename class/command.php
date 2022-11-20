@@ -9,6 +9,7 @@ class COMMAND
 
         return $room->select()
             ->where('room_code', '=', $room_code)
+            ->orderBy('create_date', 'desc')
             ->get();
     }
 
