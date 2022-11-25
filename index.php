@@ -35,7 +35,7 @@ $row = $room->getRoomByType($type);
             <div class="row">
                 <?php
                 foreach ($row as $value){
-                    $command_count = $command->getCommandByRoom($value['room_code']);
+                    $command_count = $command->getCountCommandByRoom($value['room_code']);
                 ?>
 
                     <div class="col-sm-6 col-md-6 col-lg-4">

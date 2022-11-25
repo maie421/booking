@@ -7,7 +7,7 @@ try {
     $booking->update()
         ->set('people', $_POST['people'])
         ->set('start_date', $_POST['start_date'])
-        ->set('end_date', $_POST['end_date'])
+        ->set('end_date', $_POST['end_date'].' 23:59:59')
         ->where('booking_code', $_POST['booking_code'])
         ->execute();
 
