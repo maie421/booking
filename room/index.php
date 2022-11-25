@@ -10,7 +10,7 @@ $member = new MEMBER();
 
 $row = $room->getRoomByCode($_GET['code']);
 $booking_data = $booking->getBookingByRoomCode($_GET['code']);
-$command_data = $command->getRoomByRoom($_GET['code']);
+$command_data = $command->getCommandByRoom($_GET['code']);
 
 $disabled_days = [];
 foreach ($booking_data ?? [] as $booking) {
@@ -37,7 +37,7 @@ foreach ($booking_data ?? [] as $booking) {
 <div class="container">
     <h2 class="mt-2 mb-4"><?= $row['name'] ?></h2>
     <div class="mb-4">
-<!--        <i class="bi bi-star-fill"></i> 4.8 후기 500개-->
+        <!--        <i class="bi bi-star-fill"></i> 4.8 후기 500개-->
         <?php
         if (!$bookmark->getBookmarkByRoomCode($row['room_code'], 'm6377727b479e0')) { ?>
             <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red"
@@ -103,26 +103,82 @@ foreach ($booking_data ?? [] as $booking) {
     </div>
     <?php
     foreach ($command_data ?? [] as $data) {
-    $member_data = $member->getMemberByCode($data['member_code']);
-    ?>
-    <div class="mb-3 mt-3">
-        <div class="col-md-4">
-<!--            <i class="bi bi-star-fill"></i>-->
-<!--            <i class="bi bi-star-fill"></i>-->
-<!--            <i class="bi bi-star-fill"></i>-->
-<!--            <i class="bi bi-star-half"></i>-->
-<!--            <i class="bi bi-star"></i>-->
+        $member_data = $member->getMemberByCode($data['member_code']);
+        ?>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-start">
+                        <div class="flex-grow-1 flex-shrink-1">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-1">
+                                        <?= $member_data['name'] ?> <span
+                                                class="small">- <?= $data['create_date'] ?></span>
+                                    </p>
+                                </div>
+                                <p class="small mb-0">
+                                    <?= $data['command'] ?>~
+                                </p>
+                            </div>
+
+                            <?php
+                            $reply_command_data = $command->getRplyByRoom(
+                                $_GET['code'],
+                                $data['command_code']
+                            ); ?>
+
+                            <?php
+                            foreach ($reply_command_data ?? [] as $reply_data) {
+                                $member_data = $member->getMemberByCode($reply_data['member_code']);
+                                ?>
+
+                                <div class="d-flex flex-start mt-4">
+                                    <a class="me-3" href="#">
+                                    </a>
+                                    <div class="flex-grow-1 flex-shrink-1">
+                                        <div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="mb-1">
+                                                    <?= $member_data['name'] ?> <span class="small">- <?= $reply_data['create_date'] ?></span>
+                                                </p>
+                                            </div>
+                                            <p class="small mb-0">
+                                                <?= $reply_data['command'] ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8">
-            <span><?= $member_data['name'] ?></span> |
-            <span><?= $data['create_date'] ?></span>
-        </div>
-        <div><?= $data['command'] ?>~</div>
+
+        <!--    <button type="button" class="btn btn-primary btn-sm mt-2">댓글달기</button>-->
+        <form action="/ajax/command/insertRplyCommnad.php" method="post">
+            <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
+            <input type="hidden" name="command_code" value="<?= $data['command_code'] ?>">
+            <div class="card-footer py-3 border-0">
+                <div class="d-flex flex-start w-100">
+                    <div class="form-outline w-100">
+                        <textarea class="form-control" id="textAreaExample" rows="4" name="reply_command"></textarea>
+                    </div>
+                </div>
+                <div class="float-end mt-2 pt-1">
+                    <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
+                </div>
+            </div>
+        </form>
         <hr>
         <?php
-        } ?>
-    </div>
+    } ?>
     <script>
+        // function reply() {
+        //     $('.card-footer.py-3.border-0').css('display', 'inline');
+        // }
         $(function () {
             var disabledDays = <?= json_encode($disabled_days) ?>
 
