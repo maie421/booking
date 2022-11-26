@@ -19,9 +19,10 @@ try {
     }
 
     if(empty($_FILES)){
-        $img_name = COMMON::FILE_UPLOAD($_FILES);
-    }else{
         $img_name = $_POST['img'];
+    }else{
+        $img_name = COMMON::FILE_UPLOAD($_FILES);
+        var_dump($_FILES);
     }
 
     $room = DB_CONNECT::DB()->table('room');
@@ -30,7 +31,7 @@ try {
         ->set('address', $_POST['address_detail'])
         ->set('max_people', $_POST['people'])
         ->set('price', $_POST['price'])
-        ->set('img', $_POST['img'])
+        ->set('img', $img_name)
         ->set('type', $_POST['type'])
         ->where('room_code', $_POST['room_code'])
         ->execute();
@@ -40,16 +41,16 @@ try {
     $msg = $e->getMessage();
     $result['msg'] = $msg;
 
-    if ($msg == '200') {
-        echo '<script language="javascript">';
-        echo "alert('성공하였습니다')";
-        echo '</script>';
-        echo "<script> location.href = '/admin/room' </script>";
-    } else {
-        echo '<script language="javascript">';
-        echo "alert('$msg')";
-        echo '</script>';
-        echo "<script>history.go(-1)</script>";
-    }
+//    if ($msg == '200') {
+//        echo '<script language="javascript">';
+//        echo "alert('성공하였습니다')";
+//        echo '</script>';
+//        echo "<script> location.href = '/admin/room' </script>";
+//    } else {
+//        echo '<script language="javascript">';
+//        echo "alert('$msg')";
+//        echo '</script>';
+//        echo "<script>history.go(-1)</script>";
+//    }
 }
 ?>
