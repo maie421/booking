@@ -5,12 +5,12 @@ require_once "../common/header.php";
 $room = new ROOM();
 $bookmark = new BOOKMARK();
 $booking = new BOOKING();
-$comment = new comment();
+$comment = new COMMENT();
 $member = new MEMBER();
 
 $row = $room->getRoomByCode($_GET['code']);
 $booking_data = $booking->getBookingByRoomCode($_GET['code']);
-$comment_data = $comment->getCommentByRoom($_GET['code']);
+$comment_data = $comment->getcommentByRoom($_GET['code']);
 
 $disabled_days = [];
 foreach ($booking_data ?? [] as $booking) {
@@ -132,23 +132,40 @@ foreach ($booking_data ?? [] as $booking) {
                             foreach ($reply_comment_data ?? [] as $reply_data) {
                                 $member_data = $member->getMemberByCode($reply_data['member_code']);
                                 ?>
-
-                                <div class="d-flex flex-start mt-4">
-                                    <a class="me-3" href="#">
-                                    </a>
-                                    <div class="flex-grow-1 flex-shrink-1">
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
-                                                    <?= $member_data['name'] ?> <span class="small">- <?= $reply_data['create_date'] ?></span>
+                                <form action="/ajax/comment/updateComment.php" method="post">
+                                    <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
+                                    <input type="hidden" name="comment_code" value="<?= $reply_data['comment_code'] ?>">
+                                    <div class="d-flex flex-start mt-4">
+                                        <a class="me-3" href="#">
+                                        </a>
+                                        <div class="flex-grow-1 flex-shrink-1">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="mb-1">
+                                                        <?= $member_data['name'] ?> <span class="small">- <?= $reply_data['create_date'] ?></span>
+                                                    </p>
+                                                </div>
+                                                <p class="small mb-0 text_<?= $reply_data['comment_code'] ?>">
+                                                    <?= $reply_data['comment'] ?>
+                                                </p>
+                                                <p class="small mb-0 textarea_<?= $reply_data['comment_code'] ?>" style="display: none">
+                                                    <textarea class="form-control" id="textAreaExample" rows="4"
+                                                              name="comment"><?= $reply_data['comment'] ?></textarea>
                                                 </p>
                                             </div>
-                                            <p class="small mb-0">
-                                                <?= $reply_data['comment'] ?>
-                                            </p>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-primary text_<?= $reply_data['comment_code'] ?>" onclick="reply('<?= $reply_data['comment_code'] ?>')">수정
+                                            </button>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="submit" class="btn btn-primary textarea_<?= $reply_data['comment_code'] ?>" style="display: none">확인</button>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-primary">삭제</button>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                                 <?php
                             } ?>
                         </div>
@@ -158,7 +175,7 @@ foreach ($booking_data ?? [] as $booking) {
         </div>
 
         <!--    <button type="button" class="btn btn-primary btn-sm mt-2">댓글달기</button>-->
-        <form action="/ajax/comment/insertRplyCommnad.php" method="post">
+        <form action="/ajax/comment/insertRplyComment.php" method="post">
             <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
             <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
             <div class="card-footer py-3 border-0">
@@ -176,9 +193,11 @@ foreach ($booking_data ?? [] as $booking) {
         <?php
     } ?>
     <script>
-        // function reply() {
-        //     $('.card-footer.py-3.border-0').css('display', 'inline');
-        // }
+        function reply(comment) {
+            $(`.textarea_${comment}`).css('display', 'inline');
+            $(`.text_${comment}`).css('display', 'none');
+        }
+
         $(function () {
             var disabledDays = <?= json_encode($disabled_days) ?>
 

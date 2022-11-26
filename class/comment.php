@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 
-class comment
+class COMMENT
 {
     function getCommentByRoom($room_code){
         $room = DB_CONNECT::DB()->table('comment');
