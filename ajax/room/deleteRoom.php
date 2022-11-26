@@ -12,8 +12,8 @@ try {
         ->where('room_code', $_GET['code'])
         ->execute();
 
-    $command = DB_CONNECT::DB()->table('command');
-    $command->delete()
+    $comment = DB_CONNECT::DB()->table('comment');
+    $comment->delete()
         ->where('room_code', $_GET['code'])
         ->execute();
 

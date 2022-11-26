@@ -5,12 +5,12 @@ require_once "../common/header.php";
 $room = new ROOM();
 $bookmark = new BOOKMARK();
 $booking = new BOOKING();
-$command = new COMMAND();
+$comment = new comment();
 $member = new MEMBER();
 
 $row = $room->getRoomByCode($_GET['code']);
 $booking_data = $booking->getBookingByRoomCode($_GET['code']);
-$command_data = $command->getCommandByRoom($_GET['code']);
+$comment_data = $comment->getCommentByRoom($_GET['code']);
 
 $disabled_days = [];
 foreach ($booking_data ?? [] as $booking) {
@@ -92,17 +92,17 @@ foreach ($booking_data ?? [] as $booking) {
     <div id="map" class="d-flex p-2 " style="height: 450px;"></div>
     <h4 class="mt-5 mb-5">후기</h4>
     <div class="mb-3">
-        <form action="/ajax/command/insertCommand.php" method="post">
+        <form action="/ajax/comment/insertComment.php" method="post">
             <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
             <label for="exampleFormControlTextarea1" class="form-label">후기 작성</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="command"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
             </div>
         </form>
     </div>
     <?php
-    foreach ($command_data ?? [] as $data) {
+    foreach ($comment_data ?? [] as $data) {
         $member_data = $member->getMemberByCode($data['member_code']);
         ?>
         <div class="card-body">
@@ -118,18 +118,18 @@ foreach ($booking_data ?? [] as $booking) {
                                     </p>
                                 </div>
                                 <p class="small mb-0">
-                                    <?= $data['command'] ?>~
+                                    <?= $data['comment'] ?>~
                                 </p>
                             </div>
 
                             <?php
-                            $reply_command_data = $command->getRplyByRoom(
+                            $reply_comment_data = $comment->getRplyByRoom(
                                 $_GET['code'],
-                                $data['command_code']
+                                $data['comment_code']
                             ); ?>
 
                             <?php
-                            foreach ($reply_command_data ?? [] as $reply_data) {
+                            foreach ($reply_comment_data ?? [] as $reply_data) {
                                 $member_data = $member->getMemberByCode($reply_data['member_code']);
                                 ?>
 
@@ -144,7 +144,7 @@ foreach ($booking_data ?? [] as $booking) {
                                                 </p>
                                             </div>
                                             <p class="small mb-0">
-                                                <?= $reply_data['command'] ?>
+                                                <?= $reply_data['comment'] ?>
                                             </p>
                                         </div>
                                     </div>
@@ -158,13 +158,13 @@ foreach ($booking_data ?? [] as $booking) {
         </div>
 
         <!--    <button type="button" class="btn btn-primary btn-sm mt-2">댓글달기</button>-->
-        <form action="/ajax/command/insertRplyCommnad.php" method="post">
+        <form action="/ajax/comment/insertRplyCommnad.php" method="post">
             <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
-            <input type="hidden" name="command_code" value="<?= $data['command_code'] ?>">
+            <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
             <div class="card-footer py-3 border-0">
                 <div class="d-flex flex-start w-100">
                     <div class="form-outline w-100">
-                        <textarea class="form-control" id="textAreaExample" rows="4" name="reply_command"></textarea>
+                        <textarea class="form-control" id="textAreaExample" rows="4" name="reply_comment"></textarea>
                     </div>
                 </div>
                 <div class="float-end mt-2 pt-1">

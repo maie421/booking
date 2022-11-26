@@ -2,14 +2,14 @@
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 
 try {
-    $booking = DB_CONNECT::DB()->table('command');
+    $booking = DB_CONNECT::DB()->table('comment');
     $booking->insert(
         [
-            'command_code' => uniqid('c'),
+            'comment_code' => uniqid('c'),
             'member_code' => 'm6377727b479e0',
             'room_code' => $_POST['room_code'],
-            'command' => $_POST['reply_command'],
-            'parent_command_code' => $_POST['command_code'],
+            'comment' => $_POST['reply_comment'],
+            'parent_comment_code' => $_POST['comment_code'],
             'create_date' => date("Y-m-d H:i:s"),
         ]
     )->execute();
