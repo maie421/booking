@@ -31,6 +31,7 @@ foreach ($booking_data ?? [] as $booking) {
 
     <script src="../common/js/detail.js"></script>
     <script src="../common/js/main.js"></script>
+    <script src="../common/js/comment.js"></script>
 
 </head>
 <body>
@@ -110,18 +111,42 @@ foreach ($booking_data ?? [] as $booking) {
                 <div class="col">
                     <div class="d-flex flex-start">
                         <div class="flex-grow-1 flex-shrink-1">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-1">
-                                        <?= $member_data['name'] ?> <span
-                                                class="small">- <?= $data['create_date'] ?></span>
+                            <form action="/ajax/comment/updateComment.php" method="post">
+                                <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
+                                <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
+                                <div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="mb-1">
+                                            <?= $member_data['name'] ?> <span
+                                                    class="small">- <?= $data['create_date'] ?></span>
+                                        </p>
+                                    </div>
+                                    <p class="small mb-0 text_<?= $data['comment_code'] ?>">
+                                        <?= $data['comment'] ?>
                                     </p>
+                                    <p class="small mb-0 textarea_<?= $data['comment_code'] ?>" style="display: none">
+                                                    <textarea class="form-control" id="textAreaExample" rows="4"
+                                                              name="comment"><?= $data['comment'] ?></textarea>
+                                    </p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button"
+                                                    class="btn btn-primary text_<?= $data['comment_code'] ?>"
+                                                    onclick="reply('<?= $data['comment_code'] ?>')">수정
+                                            </button>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="submit"
+                                                    class="btn btn-primary textarea_<?= $data['comment_code'] ?>"
+                                                    style="display: none">확인
+                                            </button>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="small mb-0">
-                                    <?= $data['comment'] ?>~
-                                </p>
-                            </div>
-
+                            </form>
                             <?php
                             $reply_comment_data = $comment->getRplyByRoom(
                                 $_GET['code'],
@@ -142,27 +167,34 @@ foreach ($booking_data ?? [] as $booking) {
                                             <div>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <p class="mb-1">
-                                                        <?= $member_data['name'] ?> <span class="small">- <?= $reply_data['create_date'] ?></span>
+                                                        <?= $member_data['name'] ?> <span
+                                                                class="small">- <?= $reply_data['create_date'] ?></span>
                                                     </p>
                                                 </div>
                                                 <p class="small mb-0 text_<?= $reply_data['comment_code'] ?>">
                                                     <?= $reply_data['comment'] ?>
                                                 </p>
-                                                <p class="small mb-0 textarea_<?= $reply_data['comment_code'] ?>" style="display: none">
+                                                <p class="small mb-0 textarea_<?= $reply_data['comment_code'] ?>"
+                                                   style="display: none">
                                                     <textarea class="form-control" id="textAreaExample" rows="4"
                                                               name="comment"><?= $reply_data['comment'] ?></textarea>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button" class="btn btn-primary text_<?= $reply_data['comment_code'] ?>" onclick="reply('<?= $reply_data['comment_code'] ?>')">수정
+                                            <button type="button"
+                                                    class="btn btn-primary text_<?= $reply_data['comment_code'] ?>"
+                                                    onclick="reply('<?= $reply_data['comment_code'] ?>')">수정
                                             </button>
                                         </div>
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit" class="btn btn-primary textarea_<?= $reply_data['comment_code'] ?>" style="display: none">확인</button>
+                                            <button type="submit"
+                                                    class="btn btn-primary textarea_<?= $reply_data['comment_code'] ?>"
+                                                    style="display: none">확인
+                                            </button>
                                         </div>
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button" class="btn btn-primary">삭제</button>
+                                            <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
                                         </div>
                                     </div>
                                 </form>
