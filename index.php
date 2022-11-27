@@ -4,7 +4,7 @@ require_once "common/header.php";
 $type = $_GET['type'] ?? '';
 
 $room = new ROOM();
-$comment = new comment();
+$comment = new COMMENT();
 $row = $room->getRoomByType($type);
 ?>
     <head>

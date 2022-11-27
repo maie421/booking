@@ -22,7 +22,6 @@ try {
         $img_name = $_POST['img'];
     }else{
         $img_name = COMMON::FILE_UPLOAD($_FILES);
-        var_dump($_FILES);
     }
 
     $room = DB_CONNECT::DB()->table('room');
@@ -41,16 +40,16 @@ try {
     $msg = $e->getMessage();
     $result['msg'] = $msg;
 
-//    if ($msg == '200') {
-//        echo '<script language="javascript">';
-//        echo "alert('성공하였습니다')";
-//        echo '</script>';
-//        echo "<script> location.href = '/admin/room' </script>";
-//    } else {
-//        echo '<script language="javascript">';
-//        echo "alert('$msg')";
-//        echo '</script>';
-//        echo "<script>history.go(-1)</script>";
-//    }
+    if ($msg == '200') {
+        echo '<script language="javascript">';
+        echo "alert('성공하였습니다')";
+        echo '</script>';
+        echo "<script> location.href = '/admin/room' </script>";
+    } else {
+        echo '<script language="javascript">';
+        echo "alert('$msg')";
+        echo '</script>';
+        echo "<script>history.go(-1)</script>";
+    }
 }
 ?>
