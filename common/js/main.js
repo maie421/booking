@@ -5,14 +5,19 @@ const heartClick = (code) => {
         data: {code: code},
         dataType: "JSON",
         success: function (data) {
-            if ($(`.${code}`).hasClass('bi-heart')){
-                console.log(333);
-                $(`.bi-heart.${code}`).addClass('bi-suit-heart-fill');
-                $(`.bi-heart.${code}`).removeClass('bi-heart');
+            console.log(data.msg);
+            if (data.msg == 200){
+                if ($(`.${code}`).hasClass('bi-heart')){
+                    $(`.bi-heart.${code}`).addClass('bi-suit-heart-fill');
+                    $(`.bi-heart.${code}`).removeClass('bi-heart');
+                }else {
+                    $(`.bi-suit-heart-fill.${code}`).addClass('bi-heart');
+                    $(`.bi-suit-heart-fill.${code}`).removeClass('bi-suit-heart-fill');
+                }
             }else {
-                $(`.bi-suit-heart-fill.${code}`).addClass('bi-heart');
-                $(`.bi-suit-heart-fill.${code}`).removeClass('bi-suit-heart-fill');
+                alert(data.msg);
             }
+
         }
     });
 }

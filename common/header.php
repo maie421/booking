@@ -44,9 +44,10 @@ session_start();
                 <?php
                 } else {
                     $member = new MEMBER();
-                    $member_data = $member->getMemberByCode($_SESSION['member_code']);
+                    $login_member_type = $member->getLoginMemberTypeByCode();
+
                     ?>
-                    <span class="me-3"><?=$member_data['type'] == 'basic' ? '일반회원':'관리자'?></span>
+                    <span class="me-3"><?=$login_member_type == 'basic' ? '일반회원':'관리자'?></span>
                     <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item " onclick="logout(); ">로그아웃</a></li>
@@ -77,6 +78,7 @@ session_start();
                             패스워드
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm" onclick="$('.btn-close').trigger('click');">회원가입</a>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button type="submit" class="btn btn-primary mt-3">로그인</button>
                         </div>

@@ -61,7 +61,6 @@ class COMMON
 
     public static function getSession($key)
     {
-//        session_start();
         return $_SESSION["$key"] ?? '';
     }
 

@@ -18,11 +18,12 @@ try {
         throw new Exception("패스워드가 빈칸입니다.");
     }
 
+    $member_code = uniqid('m');
     $member = DB_CONNECT::DB()->table('member');
     $member->insert(
         [
             'email' => $_POST['email'],
-            'member_code' => uniqid('m'),
+            'member_code' => $member_code,
             'name' => $_POST['name'],
             'phone_number' => $_POST['phone_number'],
             'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
@@ -34,9 +35,10 @@ try {
     $msg = $e->getMessage();
     $result['msg'] = $msg;
 
-    if($msg == '200'){
-    }else{
-        echo json_encode($result);
+    if($msg == '200') {
+        COMMON::setSession('member_code', $member_code);
     }
+
+    echo json_encode($result);
 }
 ?>

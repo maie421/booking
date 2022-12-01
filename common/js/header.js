@@ -6,7 +6,9 @@ const joinForm = () => {
         type: "POST",
         data: formValues,
         dataType: "JSON",
-        success: function (data) {
+        complete : function()
+        {
+            location.reload();
         }
     });
 }
@@ -18,9 +20,10 @@ const logout = () => {
         data: {},
         async: true,
         dataType: "JSON",
-        success: function () {
+        complete : function()
+        {
+            location.reload();
         }
     });
-    new Promise(resolve => setTimeout(resolve, 1500));
-    window.location.reload();
+
 }

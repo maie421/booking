@@ -2,11 +2,13 @@
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 
 try {
-    $bookmark = new BOOKMARK();
+    session_start();
 
     if(empty(COMMON::getSession('member_code'))){
-        throw new Exception('잘못된 접근입니다.');
+        throw new Exception('로그인을 해주세요.');
     }
+
+    $bookmark = new BOOKMARK();
 
     if(empty($bookmark->getBookmarkByRoomCode($_POST['code'],COMMON::getSession('member_code')))){
         $bookmark = DB_CONNECT::DB()->table('bookmark');

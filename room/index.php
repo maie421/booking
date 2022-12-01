@@ -19,6 +19,7 @@ foreach ($booking_data ?? [] as $booking) {
 
     $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
 }
+$login_member_type = $member->getLoginMemberTypeByCode();
 
 ?>
 <head>
@@ -62,8 +63,8 @@ foreach ($booking_data ?? [] as $booking) {
                 <form class="reserveFormArray" method="post">
                     <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
                     <input type="hidden" name="member_code" value="<?= $row['member_code'] ?>">
-                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly>
-                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly>
+                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly value="<?=date("Y-m-d")?>">
+                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly value="<?=date("Y-m-d")?>" >
                     <select class="form-select" aria-label="Default select example" name="people"
                             onclick="selectDay(<?= $row['price'] ?> );">
                         <?php
@@ -128,6 +129,7 @@ foreach ($booking_data ?? [] as $booking) {
                                                     <textarea class="form-control" id="textAreaExample" rows="4"
                                                               name="comment"><?= $data['comment'] ?></textarea>
                                     </p>
+                                    <?php if(COMMON::getSession('member_code') == $data['member_code']){?>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                             <button type="button"
@@ -145,6 +147,7 @@ foreach ($booking_data ?? [] as $booking) {
                                             <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </form>
                             <?php
@@ -181,6 +184,7 @@ foreach ($booking_data ?? [] as $booking) {
                                                 </p>
                                             </div>
                                         </div>
+                                        <?php if($login_member_type == 'manager'){?>
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                             <button type="button"
                                                     class="btn btn-primary text_<?= $reply_data['comment_code'] ?>"
@@ -196,6 +200,8 @@ foreach ($booking_data ?? [] as $booking) {
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                             <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
                                         </div>
+                                        <?php
+                                        } ?>
                                     </div>
                                 </form>
                                 <?php
@@ -207,6 +213,8 @@ foreach ($booking_data ?? [] as $booking) {
         </div>
 
         <!--    <button type="button" class="btn btn-primary btn-sm mt-2">댓글달기</button>-->
+        <?php
+        if($login_member_type == 'manager'){?>
         <form action="/ajax/comment/insertRplyComment.php" method="post">
             <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
             <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
@@ -221,6 +229,8 @@ foreach ($booking_data ?? [] as $booking) {
                 </div>
             </div>
         </form>
+        <?php
+        }?>
         <hr>
         <?php
     } ?>
@@ -231,6 +241,8 @@ foreach ($booking_data ?? [] as $booking) {
         }
 
         $(function () {
+            selectDay(<?= $row['price'] ?> );
+
             var disabledDays = <?= json_encode($disabled_days) ?>
 
             $.datepicker.setDefaults({
