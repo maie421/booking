@@ -1,6 +1,15 @@
 <?php
 
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
+session_start();
+
+$member = new MEMBER();
+$login_member_type = $member->getLoginMemberTypeByCode();
+
+if($login_member_type != "manager"){
+    header('location: http://127.0.0.1/');
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,7 +24,7 @@ require_once dirname(__FILE__, 3).'/vendor/autoload.php';
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
+    <script src="../common/js/header.js"></script>
 
 </head>
 <div class="bg-secondary text-light">
@@ -25,7 +34,7 @@ require_once dirname(__FILE__, 3).'/vendor/autoload.php';
             <div class="align-self-center">
                 <div class="dropdown">
                     <span class="me-3">관리자</span>
-                    <span class="me-3">로그아웃</span>
+                    <span class="me-3" onclick="logout()">로그아웃</span>
                 </div>
             </div>
         </div>

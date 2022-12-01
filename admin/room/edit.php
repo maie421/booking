@@ -1,7 +1,4 @@
-
-
 <?php
-
 require_once "../common/header.php";
 
 $room_code =  $_GET['code'];

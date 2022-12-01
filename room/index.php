@@ -19,7 +19,6 @@ foreach ($booking_data ?? [] as $booking) {
 
     $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
 }
-var_dump($disabled_days);
 
 $login_member_type = $member->getLoginMemberTypeByCode();
 
