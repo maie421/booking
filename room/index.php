@@ -40,7 +40,7 @@ foreach ($booking_data ?? [] as $booking) {
     <div class="mb-4">
         <!--        <i class="bi bi-star-fill"></i> 4.8 후기 500개-->
         <?php
-        if (!$bookmark->getBookmarkByRoomCode($row['room_code'], 'm6377727b479e0')) { ?>
+        if (!$bookmark->getBookmarkByRoomCode($row['room_code'], COMMON::getSession('member_code'))) { ?>
             <i class="bi bi-heart <?= $row['room_code'] ?>" style="color:red"
                onclick="heartClick('<?= $row['room_code'] ?>')"></i>
             <?php

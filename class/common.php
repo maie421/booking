@@ -59,7 +59,13 @@ class COMMON
         $_SESSION["$key"] = $value;
     }
 
-    public static function deleteSession($key)
+    public static function getSession($key)
+    {
+//        session_start();
+        return $_SESSION["$key"] ?? '';
+    }
+
+    public static function deleteSession($key): void
     {
         session_start();
         unset($_SESSION[$key]);

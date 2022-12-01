@@ -6,7 +6,7 @@ try {
     $booking->insert(
         [
             'booking_code' => uniqid('b'),
-            'member_code' => 'm6377727b479e0',
+            'member_code' => COMMON::getSession('member_code'),
             'room_code' => $_POST['room_code'],
             'start_date' => $_POST['start_date'],
             'end_date' => $_POST['end_date'].' 23:59:59',

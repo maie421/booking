@@ -20,7 +20,7 @@ $date = $_GET['date'] ?? '';
 if(!empty($date)){
     $booking_date = $booking->getBookingByDay($_GET['date']);
 }
-$booking_full = $booking->getBookingByRoomMemberCode( "m6377727b479e0");
+$booking_full = $booking->getBookingByRoomMemberCode( COMMON::getSession('member_code'));
 ?>
 <div class="d-flex bd-highlight">
     <div class="p-2 bd-highligh" style="width:80%;" id="calendar"></div>

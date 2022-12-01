@@ -8,7 +8,7 @@ class BOOKMARK
         $room = DB_CONNECT::DB()->table('bookmark');
 
         return $room->select()
-            ->where('member_code', '=', 'm6377727b479e0')
+            ->where('member_code', '=', COMMON::getSession('member_code'))
             ->get();
     }
 

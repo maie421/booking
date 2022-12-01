@@ -4,7 +4,7 @@ require_once "../common/header.php";
 
 $booking = new BOOKING();
 $room = new ROOM();
-$booking_data = $booking->getBookingByMemberCode("m6377727b479e0");
+$booking_data = $booking->getBookingByMemberCode(COMMON::getSession('member_code'));
 ?>
 <head>
     <script src="../common/js/booking.js"></script>

@@ -11,7 +11,7 @@ class BOOKING
             "SELECT  r.name, b.booking_code,b.member_code,b.start_date,b.end_date from booking as b inner join room as r on r.room_code = b.room_code where r.member_code = :member_code and b.start_date <= :date AND b.end_date >= :date"
         );
 
-        $stmt->bindValue(":member_code", "m6377727b479e0");
+        $stmt->bindValue(":member_code", COMMON::getSession('member_code'));
         $stmt->bindValue(":date", $date);
 
         $stmt->execute();
