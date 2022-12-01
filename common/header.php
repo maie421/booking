@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__, 2).'/vendor/autoload.php';
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,20 +26,33 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
         <a href="/"><img src="../img/logo.png" height="100" width="150"/></a>
         <div class="align-self-center">
             <div class="input-group  mx-sm-3">
-<!--                <input type="text" class="form-control" placeholder="검색"-->
-<!--                       aria-label="검색 시작하기"-->
-<!--                       aria-describedby="basic-addon2">-->
-<!--                <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>-->
+                <!--                <input type="text" class="form-control" placeholder="검색"-->
+                <!--                       aria-label="검색 시작하기"-->
+                <!--                       aria-describedby="basic-addon2">-->
+                <!--                <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>-->
             </div>
         </div>
         <div class="align-self-center">
             <div class="dropdown">
-                <span class="me-3">관리자</span>
-                <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#LoginForm">로그인</a></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm">회원가입</a></li>
-                </ul>
+                <?php
+                if (empty($_SESSION['member_code'])) { ?>
+                    <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item " data-bs-toggle="modal" data-bs-target="#LoginForm">로그인</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm">회원가입</a></li>
+                    </ul>
+                <?php
+                } else {
+                    $member = new MEMBER();
+                    $member_data = $member->getMemberByCode($_SESSION['member_code']);
+                    ?>
+                    <span class="me-3"><?=$member_data['type'] == 'basic' ? '일반회원':'관리자'?></span>
+                    <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item " onclick="logout(); ">로그아웃</a></li>
+                    </ul>
+                <?php
+                } ?>
             </div>
         </div>
     </div>
@@ -53,7 +67,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                         aria-label="Close"></button>
                 <div>
                     <h1 class="text-center">로그인</h1>
-                    <form class="loginFormObject" method="post" action= "../ajax/login.php">
+                    <form class="loginFormObject" method="post" action="../ajax/login.php">
                         <div class="mb-3 mt-4">
                             이메일
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1"
@@ -101,7 +115,8 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
                         </div>
                         <div class="mb-3">
                             패스워드
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                                   required>
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button type="submit" class="btn btn-primary mt-3" onclick="joinForm()">확인</button>

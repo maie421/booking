@@ -4,7 +4,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 
 class COMMON
 {
-    public static function  FILE_UPLOAD($files)
+    public static function FILE_UPLOAD($files)
     {
         $uploads_dir = dirname(__FILE__, 2).'/img/room';
         $allowed_ext = array('jpg', 'jpeg', 'png', 'gif');
@@ -40,12 +40,29 @@ class COMMON
         return "$time.$ext";
     }
 
-    public static function getDatesStartToLast($startDate, $lastDate) {
+    public static function getDatesStartToLast($startDate, $lastDate)
+    {
         $regex = "/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/";
-        if(!(preg_match($regex, $startDate) && preg_match($regex, $lastDate))) return "Not Date Format";
-        $period = new DatePeriod( new DateTime($startDate), new DateInterval('P1D'), new DateTime($lastDate." +1 day"));
-        foreach ($period as $date) $dates[] = $date->format("Y-m-d");
+        if (!(preg_match($regex, $startDate) && preg_match($regex, $lastDate))) {
+            return "Not Date Format";
+        }
+        $period = new DatePeriod(new DateTime($startDate), new DateInterval('P1D'), new DateTime($lastDate." +1 day"));
+        foreach ($period as $date) {
+            $dates[] = $date->format("Y-m-d");
+        }
         return $dates;
+    }
+
+    public static function setSession($key, $value)
+    {
+        session_start();
+        $_SESSION["$key"] = $value;
+    }
+
+    public static function deleteSession($key)
+    {
+        session_start();
+        unset($_SESSION[$key]);
     }
 }
 

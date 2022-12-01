@@ -29,15 +29,16 @@ try {
     $result['msg'] = $msg;
 
     if ($msg == '200') {
+        COMMON::setSession('member_code', $member_data['member_code']);
         echo '<script language="javascript">';
         echo "alert('로그인에 성공하였습니다.')";
         echo '</script>';
-        echo "<script>history.back()</script>";
+        echo "<script> location.href = '/' </script>";
     } else {
         echo '<script language="javascript">';
         echo "alert('$msg')";
         echo '</script>';
-        echo "<script>history.back()</script>";
+        echo "<script> location.href = '/' </script>";
     }
 }
 ?>
