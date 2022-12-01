@@ -2,6 +2,8 @@
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 
 try {
+    session_start();
+
     $booking = DB_CONNECT::DB()->table('comment');
     $booking->insert(
         [

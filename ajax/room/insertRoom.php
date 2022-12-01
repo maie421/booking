@@ -2,6 +2,8 @@
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 
 try {
+    session_start();
+
     if (empty($_POST['name'])) {
         throw new Exception("이름이 빈칸입니다.");
     }

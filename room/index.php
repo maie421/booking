@@ -19,6 +19,8 @@ foreach ($booking_data ?? [] as $booking) {
 
     $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
 }
+var_dump($disabled_days);
+
 $login_member_type = $member->getLoginMemberTypeByCode();
 
 ?>
@@ -63,8 +65,8 @@ $login_member_type = $member->getLoginMemberTypeByCode();
                 <form class="reserveFormArray" method="post">
                     <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
                     <input type="hidden" name="member_code" value="<?= $row['member_code'] ?>">
-                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly value="<?=date("Y-m-d")?>">
-                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly value="<?=date("Y-m-d")?>" >
+                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly >
+                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly >
                     <select class="form-select" aria-label="Default select example" name="people"
                             onclick="selectDay(<?= $row['price'] ?> );">
                         <?php
@@ -241,7 +243,6 @@ $login_member_type = $member->getLoginMemberTypeByCode();
         }
 
         $(function () {
-            selectDay(<?= $row['price'] ?> );
 
             var disabledDays = <?= json_encode($disabled_days) ?>
 
@@ -267,6 +268,7 @@ $login_member_type = $member->getLoginMemberTypeByCode();
 // 특정일 선택막기
             function disableAllTheseDays(date) {
                 var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+                d = ('00' + d).slice(-2);
                 for (i = 0; i < disabledDays.length; i++) {
                     if ($.inArray(y + '-' + (m + 1) + '-' + d, disabledDays) != -1) {
                         return [false];

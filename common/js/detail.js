@@ -11,7 +11,7 @@ const reserveForm = () => {
                 alert('예약 완료');
                 location.reload();
             }else{
-                alert('실패하였습니다.');
+                alert(data.msg);
             }
         }
     });

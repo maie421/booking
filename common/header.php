@@ -51,6 +51,7 @@ session_start();
                     <i class="bi bi-person-circle dropdown-toggle" data-bs-toggle="dropdown"></i>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item " onclick="logout(); ">로그아웃</a></li>
+                        <li><a class="dropdown-item " href="/mypage" ">마이페이지</a></li>
                     </ul>
                 <?php
                 } ?>

@@ -2,6 +2,12 @@
 require_once dirname(__FILE__, 3).'/vendor/autoload.php';
 
 try {
+    session_start();
+
+    if(empty(COMMON::getSession('member_code'))){
+        throw new Exception('로그인을 시도해 주세요.');
+    }
+
     $booking = DB_CONNECT::DB()->table('booking');
     $booking->insert(
         [
