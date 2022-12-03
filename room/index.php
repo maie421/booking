@@ -93,7 +93,9 @@ $login_member_type = $member->getLoginMemberTypeByCode();
     </div>
     <h4 class="mt-5 mb-5">위치</h4>
     <div id="map" class="d-flex p-2 " style="height: 450px;"></div>
-    <h4 class="mt-5 mb-5">후기</h4>
+        <h4 class="mt-5 mb-5">후기</h4>
+    <?php
+    if($login_member_type != false){?>
     <div class="mb-3">
         <form action="/ajax/comment/insertComment.php" method="post">
             <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
@@ -104,6 +106,8 @@ $login_member_type = $member->getLoginMemberTypeByCode();
             </div>
         </form>
     </div>
+    <?php
+    }?>
     <?php
     foreach ($comment_data ?? [] as $data) {
         $member_data = $member->getMemberByCode($data['member_code']);

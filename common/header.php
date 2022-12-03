@@ -2,6 +2,10 @@
 
 require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 session_start();
+
+ if(!empty($_COOKIE[ "member_code" ])){
+     $_SESSION["member_code"] = $_COOKIE['member_code'];
+ }
 ?>
 <!doctype html>
 <html lang="en">
@@ -83,6 +87,8 @@ session_start();
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm" onclick="$('.btn-close').trigger('click');">회원가입</a>
+                        <input type="checkbox" id="auto_login" name="auto_login" value="y">
+                        <label for="auto_login">자동로그인</label>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button type="submit" class="btn btn-primary mt-3">로그인</button>
                         </div>
