@@ -88,7 +88,7 @@ session_start();
                         </div>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#JoinForm" onclick="$('.btn-close').trigger('click');">회원가입</a>
                         <input type="checkbox" id="auto_login" name="auto_login" value="y">
-                        <label for="auto_login">자동로그인</label>
+                        <label for="auto_login" class="" style="font-size: smaller;color: #333333"> 자동로그인</label>
                         <div class="d-grid gap-2 col-6 mx-auto mt-3">
                             <button type="submit" class="btn btn-primary mt-3">로그인</button>
                         </div>
