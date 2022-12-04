@@ -30,7 +30,9 @@ try {
 
     if ($msg == '200') {
         COMMON::setSession('member_code', $member_data['member_code']);
-
+        if(empty($_POST['auto_login'])){
+            $_POST['auto_login'] = '';
+        }
         if($_POST['auto_login'] == 'y'){
             setcookie("member_code",$member_data['member_code'],(time()+3600*24*30),"/"); // 한달간 자동로그인 유지
         }

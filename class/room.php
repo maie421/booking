@@ -34,6 +34,15 @@ class ROOM
 
         return $stmt->fetchAll();
     }
+
+    function updateRoomViewByCode(string $room_code, int $count){
+        $room = DB_CONNECT::DB()->table('room');
+        $count+=1;
+        return $room->update()
+            ->set('views', $count)
+            ->where('room_code', $room_code)
+            ->execute();
+    }
 }
 
 

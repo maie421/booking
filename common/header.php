@@ -6,6 +6,15 @@ session_start();
  if(!empty($_COOKIE[ "member_code" ])){
      $_SESSION["member_code"] = $_COOKIE['member_code'];
  }
+
+$self_url = $_SERVER["PHP_SELF"];
+ if(!empty($_GET['code']) && $self_url == "/room/index.php" && empty($_COOKIE[ "room_view_{$_GET['code']}" ])){
+     setcookie("room_view_{$_GET['code']}",'Y',(time()+3600*24),"room/?code={$_GET['code']}");
+     $room = new ROOM();
+     $row = $room->getRoomByCode($_GET['code']);
+     $room->updateRoomViewByCode($_GET['code'], $row['views']);
+ }
+
 ?>
 <!doctype html>
 <html lang="en">

@@ -52,6 +52,7 @@ $login_member_type = $member->getLoginMemberTypeByCode();
             <?php
         } ?>
         저장
+        <?=$row['views']?>
     </div>
     <div class="d-flex">
         <div class="p-2">
