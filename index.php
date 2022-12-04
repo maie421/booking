@@ -1,5 +1,4 @@
 <?php
-
 require_once "common/header.php";
 $type = $_GET['type'] ?? '';
 
@@ -80,6 +79,42 @@ $row = $room->getRoomByType($type);
         </div>
     </section>
     </body>
+<script>
+
+
+    $(document).ready(function(){
+        cookiedata = document.cookie;
+        if(cookiedata.indexOf("close=Y")<0){
+            noticeWindow  =  window.open('popup.php','notice','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=380,height=330');
+            noticeWindow.opener = self;
+            $("#new_pop").show();
+        }else{
+            $("#new_pop").hide();
+        }
+    });
+
+    function exit(){
+        if($("input[name=layer_close]").is(":checked") == true){
+            setCookie("close","Y",1);
+        }
+
+        $("#new_pop").hide();
+        window.open('','_self').close();
+    }
+
+    function exit2(){
+        $("#new_pop").hide();
+        window.open('','_self').close();
+        setCookie("close","Y",1);
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000)); //시간설정
+        var expires = "expires="+d.toUTCString(); var temp = cname + "=" + cvalue + "; " + expires;
+        document.cookie = temp;
+    }
+</script>
 <?php
 require_once "common/footer.php";
 ?>
