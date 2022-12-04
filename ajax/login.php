@@ -34,7 +34,7 @@ try {
             $_POST['auto_login'] = '';
         }
         if($_POST['auto_login'] == 'y'){
-            setcookie("member_code",$member_data['member_code'],(time()+3600*24*30),"/"); // 한달간 자동로그인 유지
+            setcookie("member_code",session_id(),(time()+3600*24*30),"/"); // 한달간 자동로그인 유지
         }
 
         echo '<script language="javascript">';
