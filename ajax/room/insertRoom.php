@@ -20,6 +20,7 @@ try {
         throw new Exception("가격이 빈칸입니다.");
     }
 
+    var_dump($_POST);
     $img_name = COMMON::FILE_UPLOAD($_FILES);
 
     $room = DB_CONNECT::DB()->table('room');
