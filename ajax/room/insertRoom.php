@@ -34,6 +34,7 @@ try {
             'img' => $img_name,
             'member_code' => COMMON::getSession('member_code'),
             'type' => $_POST['type'],
+            'views' => 0,
         ]
     )->execute();
 
