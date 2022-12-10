@@ -32,7 +32,7 @@ try {
             'price' => $_POST['price'],
             'create_date' => date("Y-m-d H:i:s"),
             'img' => $img_name,
-            'member_code' => COMMON::getSession('member_code'),
+            'member_code' => COMMON::getSession('member_code'),22
             'type' => $_POST['type'],
         ]
     )->execute();
