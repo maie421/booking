@@ -20,6 +20,7 @@ try {
         throw new Exception("가격이 빈칸입니다.");
     }
 
+    var_dump($_POST);
     $img_name = COMMON::FILE_UPLOAD($_FILES);
 
     $room = DB_CONNECT::DB()->table('room');
@@ -34,6 +35,7 @@ try {
             'img' => $img_name,
             'member_code' => COMMON::getSession('member_code'),
             'type' => $_POST['type'],
+            'views' => 0,
         ]
     )->execute();
 

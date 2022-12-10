@@ -24,7 +24,7 @@ if($login_member_type != "manager"){
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="../common/js/header.js"></script>
+    <script src="../../common/js/header.js"></script>
 
 </head>
 <div class="bg-secondary text-light">
