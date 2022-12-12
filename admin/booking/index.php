@@ -4,7 +4,7 @@ require_once "../common/header.php";
 
 $booking = new BOOKING();
 $room = new ROOM();
-$booking_data = $booking->getBookingByMemberCode(COMMON::getSession('member_code'));
+$booking_data = $booking->getBookingByRoomMemberCodeFilter(COMMON::getSession('member_code'));
 
 if(empty($_GET['type'])){
     $_GET['type'] = '';
@@ -17,11 +17,11 @@ if(empty($_GET['type'])){
 <body>
 <div class="container">
     <div class="row flex-nowrap">
-        <?php include_once "navebar.php" ?>
+        <? include_once "../common/navebar.php" ?>
         <div class="col py-3">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <select class="form-select" aria-label="Default select example" onchange="location.href=this.value">
-                    <option value="/mypage/booking.php" selected>전체</option>
+                    <option value="/admin/booking" selected>전체</option>
                     <option value="?type=complete" <?=$_GET['type'] == 'complete' ? 'selected': '' ?>>숙박 완료</option>
                     <option value="?type=incomplete" <?=$_GET['type'] == 'incomplete' ? 'selected': '' ?>>숙박 미완료</option>
                 </select>
@@ -33,13 +33,13 @@ if(empty($_GET['type'])){
                         continue;
                     }else if(date("Y-m-d", strtotime($value['start_date'])) <= date("Y-m-d") && $_GET['type'] == 'incomplete'){//숙박 미완료
                         continue;
-                    }
+                     }
 
                     $room_date = $room->getRoomByCode($value['room_code']); ?>
                     <div class="card mb-3 me-3" style="max-width: 500px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="../img/room/<?= $room_date['img'] ?>"
+                                <img src="../../img/room/<?= $room_date['img'] ?>"
                                      class="img-fluid rounded-start" alt="삭제된 이미지">
                             </div>
                             <div class="col-md-8">
@@ -52,14 +52,14 @@ if(empty($_GET['type'])){
                             </div>
                         </div>
                         <?php if (date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d")) { ?>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <div class="d-flex bd-highlight">
-                                <a href="/mypage/edit.php?code=<?= $value['booking_code'] ?>" type="button"
-                                   class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
-                                <a type="button" class="btn btn-outline-dark mr-3"
-                                   onclick="deleteBooking('<?= $value['booking_code'] ?>')">예약 취소</a>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <div class="d-flex bd-highlight">
+                                    <a href="/mypage/edit.php?code=<?= $value['booking_code'] ?>" type="button"
+                                       class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
+                                    <a type="button" class="btn btn-outline-dark mr-3"
+                                       onclick="deleteBooking('<?= $value['booking_code'] ?>')">예약 취소</a>
+                                </div>
                             </div>
-                        </div>
                         <?php } ?>
                     </div>
                     <?php
@@ -70,5 +70,5 @@ if(empty($_GET['type'])){
 </div>
 </body>
 <?php
-require_once "../common/footer.php";
+require_once "../../common/footer.php";
 ?>

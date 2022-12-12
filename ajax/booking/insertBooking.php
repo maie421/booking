@@ -24,6 +24,7 @@ try {
 } catch(Exception $e){
     $msg = $e->getMessage();
     $result['msg'] = $msg;
+    $result['data'] = $_POST['room_code'];
 
     echo json_encode($result);
 }

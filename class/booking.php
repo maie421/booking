@@ -47,6 +47,15 @@ class BOOKING
             ->get();
     }
 
+    function getBookingByRoomMemberCodeFilter($member_code)
+    {
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select()
+            ->where('room_member_code', '=', $member_code)
+            ->get();
+    }
+
     function getBookingByRoomCode($room_code)
     {
         $booking = DB_CONNECT::DB()->table('booking');
@@ -63,6 +72,15 @@ class BOOKING
             ->where('room_code', '=', $room_code)
             ->where('booking_code', '!=', $booking_code)
             ->get();
+    }
+
+    function getBookingByRoomMember($room_code){
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        return $booking->select()
+            ->where('room_code', '=', $room_code)
+            ->where('member_code', '=', COMMON::getSession('member_code'))
+            ->count();
     }
 }
 

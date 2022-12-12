@@ -13,15 +13,15 @@ $booking_data = $booking->getBookingByRoomCode($_GET['code']);
 $comment_data = $comment->getcommentByRoom($_GET['code']);
 
 $disabled_days = [];
-foreach ($booking_data ?? [] as $booking) {
-    $start_date = date("Y-m-d", strtotime($booking['start_date']));
-    $end_date = date("Y-m-d", strtotime($booking['end_date']));
+foreach ($booking_data ?? [] as $booking_day) {
+    $start_date = date("Y-m-d", strtotime($booking_day['start_date']));
+    $end_date = date("Y-m-d", strtotime($booking_day['end_date']));
 
     $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
 }
 
 $login_member_type = $member->getLoginMemberTypeByCode();
-
+$login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
 ?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -96,7 +96,7 @@ $login_member_type = $member->getLoginMemberTypeByCode();
     <div id="map" class="d-flex p-2 " style="height: 450px;"></div>
         <h4 class="mt-5 mb-5">후기</h4>
     <?php
-    if($login_member_type != false){?>
+    if($login_member_booking > 0 && $login_member_type != 'manager'){?>
     <div class="mb-3">
         <form action="/ajax/comment/insertComment.php" method="post">
             <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
@@ -265,9 +265,7 @@ $login_member_type = $member->getLoginMemberTypeByCode();
                 beforeShowDay: disableAllTheseDays
             });
 
-            $(function () {
-                $("#datepicker1, #datepicker2").datepicker();
-            });
+            $("#datepicker1, #datepicker2").datepicker();
 
 // 특정일 선택막기
             function disableAllTheseDays(date) {

@@ -4,11 +4,15 @@
             id="menu">
             <li>
                 <a href="/admin" class="nav-link px-0 align-middle text-secondary">
-                    <i class="bi bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">예약 관리</span> </a>
+                    <i class="bi bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">예약 달력</span> </a>
             </li>
             <li>
                 <a href="/admin/room" class="nav-link px-0 align-middle text-secondary">
                     <i class="bi bi-house"></i> <span class="ms-1 d-none d-sm-inline">객실 관리</span></a>
+            </li>
+            <li>
+                <a href="/admin/booking" class="nav-link px-0 align-middle text-secondary">
+                    <i class="bi bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">예약 리스트</span></a>
             </li>
         </ul>
         <hr>
