@@ -29,7 +29,7 @@ try {
     $result['msg'] = $msg;
 
     if ($msg == '200') {
-        COMMON::setSession('member_code', $member_data['member_code']);
+        setcookie("member_code",session_id(),(time()+3600*24*30),"/");
         if(empty($_POST['auto_login'])){
             $_POST['auto_login'] = '';
         }

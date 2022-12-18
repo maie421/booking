@@ -4,7 +4,7 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 session_start();
 
  if(!empty($_COOKIE[ "member_code" ])){
-     $_SESSION["member_code"] = $_COOKIE['member_code'];
+     setcookie ( "PHPSESSID", $_COOKIE['member_code'], 0, "/", "");
  }
 
 $self_url = $_SERVER["PHP_SELF"];

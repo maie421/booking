@@ -9,7 +9,7 @@ const reserveForm = () => {
         success: function (data) {
             if (data.msg == 200){
                 alert('예약 완료');
-                location.reload();
+                setTimeout("location.reload()", 5);
             }else{
                 alert(data.msg);
             }

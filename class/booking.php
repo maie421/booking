@@ -80,6 +80,7 @@ class BOOKING
         return $booking->select()
             ->where('room_code', '=', $room_code)
             ->where('member_code', '=', COMMON::getSession('member_code'))
+            ->where('end_date', '<', date("Y-m-d"))
             ->count();
     }
 }
