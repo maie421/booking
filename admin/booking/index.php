@@ -4,12 +4,12 @@ require_once "../common/header.php";
 
 $booking = new BOOKING();
 $room = new ROOM();
-$booking_data = $booking->getBookingByRoomMemberCodeFilter(COMMON::getSession('member_code'));
 
-if(empty($_GET['type'])){
+if (empty($_GET['type'])) {
     $_GET['type'] = '';
 }
 
+$booking_data = $booking->getBookingByRoomMemberCodeFilter(COMMON::getSession('member_code'), $_GET['type']);
 ?>
 <head>
     <script src="../common/js/booking.js"></script>
@@ -17,24 +17,19 @@ if(empty($_GET['type'])){
 <body>
 <div class="container">
     <div class="row flex-nowrap">
-        <? include_once "../common/navebar.php" ?>
+        <?
+        include_once "../common/navebar.php" ?>
         <div class="col py-3">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <select class="form-select" aria-label="Default select example" onchange="location.href=this.value">
                     <option value="/admin/booking" selected>전체</option>
-                    <option value="?type=complete" <?=$_GET['type'] == 'complete' ? 'selected': '' ?>>숙박 완료</option>
-                    <option value="?type=incomplete" <?=$_GET['type'] == 'incomplete' ? 'selected': '' ?>>숙박 미완료</option>
+                    <option value="?type=complete" <?= $_GET['type'] == 'complete' ? 'selected' : '' ?>>숙박 완료</option>
+                    <option value="?type=incomplete" <?= $_GET['type'] == 'incomplete' ? 'selected' : '' ?>>숙박 미완료
+                    </option>
                 </select>
 
                 <?php
                 foreach ($booking_data ?? [] as $value) {
-                    //숙박 완료
-                    if(date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d") && $_GET['type'] == 'complete'){
-                        continue;
-                    }else if(date("Y-m-d", strtotime($value['start_date'])) <= date("Y-m-d") && $_GET['type'] == 'incomplete'){//숙박 미완료
-                        continue;
-                     }
-
                     $room_date = $room->getRoomByCode($value['room_code']); ?>
                     <div class="card mb-3 me-3" style="max-width: 500px;">
                         <div class="row g-0">
@@ -45,22 +40,21 @@ if(empty($_GET['type'])){
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $room_date['name'] ?? '삭제된 룸입니다.' ?></h5>
-                                    <p class="card-text"><small class="text-muted"><?= $room_date['type'] ?? '삭제된 룸입니다.'?></small></p>
+                                    <p class="card-text"><small
+                                                class="text-muted"><?= $room_date['type'] ?? '삭제된 룸입니다.' ?></small></p>
                                     <p class="card-text"><?= date("Y-m-d", strtotime($value['start_date'])) ?>
                                         ~ <?= date("Y-m-d", strtotime($value['end_date'])) ?></p>
                                 </div>
                             </div>
                         </div>
-                        <?php if (date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d")) { ?>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <div class="d-flex bd-highlight">
-                                    <a href="/mypage/edit.php?code=<?= $value['booking_code'] ?>" type="button"
-                                       class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
-                                    <a type="button" class="btn btn-outline-dark mr-3"
-                                       onclick="deleteBooking('<?= $value['booking_code'] ?>')">예약 취소</a>
-                                </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <div class="d-flex bd-highlight">
+                                <a href="/admin/booking/edit.php?code=<?= $value['booking_code'] ?>" type="button"
+                                   class="btn btn-outline-dark" style="margin-right: 5px">예약 수정</a>
+                                <a type="button" class="btn btn-outline-dark mr-3"
+                                   onclick="deleteBooking('<?= $value['booking_code'] ?>')">예약 취소</a>
                             </div>
-                        <?php } ?>
+                        </div>
                     </div>
                     <?php
                 } ?>

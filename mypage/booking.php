@@ -4,11 +4,12 @@ require_once "../common/header.php";
 
 $booking = new BOOKING();
 $room = new ROOM();
-$booking_data = $booking->getBookingByMemberCode(COMMON::getSession('member_code'));
 
 if(empty($_GET['type'])){
     $_GET['type'] = '';
 }
+
+$booking_data = $booking->getBookingByMemberCode(COMMON::getSession('member_code') ,$_GET['type']);
 
 ?>
 <head>
@@ -28,13 +29,6 @@ if(empty($_GET['type'])){
 
                 <?php
                 foreach ($booking_data ?? [] as $value) {
-                    //숙박 완료
-                    if(date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d") && $_GET['type'] == 'complete'){
-                        continue;
-                    }else if(date("Y-m-d", strtotime($value['start_date'])) <= date("Y-m-d") && $_GET['type'] == 'incomplete'){//숙박 미완료
-                        continue;
-                    }
-
                     $room_date = $room->getRoomByCode($value['room_code']); ?>
                     <div class="card mb-3 me-3" style="max-width: 500px;">
                         <div class="row g-0">
@@ -51,7 +45,7 @@ if(empty($_GET['type'])){
                                 </div>
                             </div>
                         </div>
-                        <?php if (date("Y-m-d", strtotime($value['start_date'])) > date("Y-m-d")) { ?>
+                        <?php if ($value['booking_status'] == 'incomplete') { ?>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <div class="d-flex bd-highlight">
                                 <a href="/mypage/edit.php?code=<?= $value['booking_code'] ?>" type="button"

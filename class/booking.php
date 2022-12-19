@@ -38,22 +38,37 @@ class BOOKING
             ->get();
     }
 
-    function getBookingByMemberCode($member_code)
+    function getBookingByMemberCode($member_code, $type = '')
     {
         $booking = DB_CONNECT::DB()->table('booking');
 
-        return $booking->select()
-            ->where('member_code', '=', $member_code)
-            ->get();
+        if(empty($type)){
+            return $booking->select()
+                ->where('member_code', '=', $member_code)
+                ->get();
+        }else{
+            return $booking->select()
+                ->where('member_code', '=', $member_code)
+                ->where('booking_status', '=', $type)
+                ->get();
+        }
     }
 
-    function getBookingByRoomMemberCodeFilter($member_code)
+    function getBookingByRoomMemberCodeFilter($member_code, $type = '')
     {
         $booking = DB_CONNECT::DB()->table('booking');
 
-        return $booking->select()
-            ->where('room_member_code', '=', $member_code)
-            ->get();
+        if(empty($type)){
+            return $booking->select()
+                ->where('room_member_code', '=', $member_code)
+                ->get();
+        }else{
+            return $booking->select()
+                ->where('room_member_code', '=', $member_code)
+                ->where('booking_status', '=', $type)
+                ->get();
+        }
+
     }
 
     function getBookingByRoomCode($room_code)
@@ -80,7 +95,7 @@ class BOOKING
         return $booking->select()
             ->where('room_code', '=', $room_code)
             ->where('member_code', '=', COMMON::getSession('member_code'))
-            ->where('end_date', '<', date("Y-m-d"))
+            ->where('booking_status', '=', 'complete')
             ->count();
     }
 }

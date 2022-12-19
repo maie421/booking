@@ -25,6 +25,7 @@ try {
             'end_date' => $_POST['end_date'].' 23:59:59',
             'people' => $_POST['people'],
             'price' => $gap->days * floor($row['price']),
+            'booking_status' => 'incomplete',
             'room_member_code' => $_POST['member_code'],
         ]
     )->execute();
