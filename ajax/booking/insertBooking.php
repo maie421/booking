@@ -8,6 +8,13 @@ try {
         throw new Exception('로그인을 시도해 주세요.');
     }
 
+    $start = new DateTime($_POST['start_date']);
+    $end = new DateTime($_POST['end_date']);
+    $gap = date_diff($start, $end);
+
+    $room = new ROOM();
+    $row = $room->getRoomByCode($_POST['room_code']);
+
     $booking = DB_CONNECT::DB()->table('booking');
     $booking->insert(
         [
@@ -17,9 +24,11 @@ try {
             'start_date' => $_POST['start_date'],
             'end_date' => $_POST['end_date'].' 23:59:59',
             'people' => $_POST['people'],
+            'price' => $gap->days * floor($row['price']),
             'room_member_code' => $_POST['member_code'],
         ]
     )->execute();
+
     throw new Exception('200');
 } catch(Exception $e){
     $msg = $e->getMessage();
