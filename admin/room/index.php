@@ -2,7 +2,31 @@
 require_once "../common/header.php";
 
 $room = new ROOM();
-$row = $room->getRoom();
+
+$page = $_GET['page'] ?? 1;
+$type = $_GET['type'] ?? '';
+
+$list_num = 6;
+$page_num = 7;
+
+$row = $room->getRoom($type,(int)$page, $list_num);
+$num = $room->getRoomCount();
+
+$total_page = ceil($num / $list_num);
+$total_block = ceil($total_page / $page_num);
+$now_block = ceil($page / $page_num);
+$s_pageNum = ($now_block - 1) * $page_num + 1;
+
+if($s_pageNum <= 0){
+    $s_pageNum = 1;
+}
+
+$e_pageNum = $now_block * $page_num;
+
+if($e_pageNum > $total_page){
+    $e_pageNum = $total_page;
+}
+
 ?>
 <head>
     <script src="../../common/js/room.js"></script>
@@ -16,6 +40,13 @@ $row = $room->getRoom();
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="add.php" class="btn btn-primary me-md-2 mb-3" type="button">추가</a>
             </div>
+            <select class="form-select" aria-label="Default select example" onchange="location.href=this.value">
+                <option value="/admin/room" selected>전체</option>
+                <option value="?type=motel" <?=$type == 'motel' ? 'selected': '' ?>>모텔</option>
+                <option value="?type=hotel" <?=$type == 'hotel' ? 'selected': '' ?>>호텔</option>
+                <option value="?type=pension" <?=$type == 'pension' ? 'selected': '' ?>>펜션</option>
+            </select>
+
             <?php
             foreach ($row as $key => $value) {
                 ?>
@@ -34,6 +65,37 @@ $row = $room->getRoom();
             } ?>
         </div>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <?php if($page <= 1){?>
+                    <a class="page-link" href="?page=1<?=empty($type) ? '': "&type=$type" ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                <?php } else {?>
+                    <a class="page-link" href="?page=<?=$page-1?><?=empty($type) ? '': "&type=$type" ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                <?php }?>
+            </li>
+            <?php
+            for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){?>
+                <li class="page-item"><a class="page-link" href="?page=<?=$print_page?><?=empty($type) ? '': "&type=$type" ?>"><?=$print_page?></a></li>
+            <?php } ?>
+            <li class="page-item">
+                <?php
+                if($page >= $total_page){?>
+                    <a class="page-link"  href="?page=<?=$total_page?><?=empty($type) ? '': "&type=$type" ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                <?php } else{ ?>
+                    <a class="page-link"  href="?page=<?=$page+1?><?=empty($type) ? '': "&type=$type" ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                <?php } ?>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 <?php

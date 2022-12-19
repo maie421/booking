@@ -4,12 +4,32 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 
 class ROOM
 {
-    function getRoom(){
+    function getRoom($type, $page, $list_num){
+        $last = $page * $list_num;
+        $first = $last - $list_num;
+
+        $room = DB_CONNECT::DB()->table('room');
+
+        if(empty($type)){
+            return $room->select()
+                ->where('member_code', '=', COMMON::getSession('member_code'))
+                ->limit($first, $list_num)
+                ->get();
+        }else {
+            return $room->select()
+                ->where('member_code', '=', COMMON::getSession('member_code'))
+                ->where('type', '=', $type)
+                ->limit($first, $list_num)
+                ->get();
+        }
+    }
+
+    function getRoomCount(){
         $room = DB_CONNECT::DB()->table('room');
 
         return $room->select()
             ->where('member_code', '=', COMMON::getSession('member_code'))
-            ->get();
+            ->count();
     }
 
     function getRoomByCode(string $room_code){
@@ -43,7 +63,7 @@ class ROOM
         return $stmt->fetchAll();
     }
 
-    function getRoomByCount($room_type = ''){
+    function getRoomByTypeCount($room_type = ''){
         $room = DB_CONNECT::DB()->table('room');
 
         if(empty($room_type)){

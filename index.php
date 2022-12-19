@@ -9,7 +9,7 @@ $page_num = 7;
 $room = new ROOM();
 $comment = new COMMENT();
 $row = $room->getRoomByType($type,(int)$page, $list_num);
-$num = $room->getRoomByCount($type);
+$num = $room->getRoomByTypeCount($type);
 
 $total_page = ceil($num / $list_num);
 $total_block = ceil($total_page / $page_num);
