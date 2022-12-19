@@ -4,12 +4,130 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cbdf0b9da12c0f9ec483283327b5230",
-    "packages": [],
-    "packages-dev": [],
-    "aliases": [],
+    "content-hash": "0d44fd612b83d5f408c3166821c77b0d",
+    "packages": [
+        {
+            "name": "clancats/hydrahon",
+            "version": "v1.1.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ClanCats/Hydrahon.git",
+                "reference": "b1e1b2207ff57815a41e6832803cdc1d46e36f19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ClanCats/Hydrahon/zipball/b1e1b2207ff57815a41e6832803cdc1d46e36f19",
+                "reference": "b1e1b2207ff57815a41e6832803cdc1d46e36f19",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ClanCats\\Hydrahon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mario Döring",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Fast & standalone PHP MySQL Query Builder library.",
+            "homepage": "https://github.com/ClanCats/Hydrahon",
+            "keywords": [
+                "builder",
+                "database",
+                "mysql",
+                "query",
+                "sqlite"
+            ],
+            "support": {
+                "issues": "https://github.com/ClanCats/Hydrahon/issues",
+                "source": "https://github.com/ClanCats/Hydrahon/tree/v1.1.14"
+            },
+            "time": "2020-09-30T14:43:29+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "c981c04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/c981c04",
+                "reference": "c981c04",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/fzaninotto/Faker/issues",
+                "source": "https://github.com/fzaninotto/Faker/tree/master"
+            },
+            "abandoned": true,
+            "time": "2020-12-11T09:59:14+00:00"
+        }
+    ],
+    "aliases": [
+        {
+            "package": "fzaninotto/faker",
+            "version": "9999999-dev",
+            "alias": "1.9.1",
+            "alias_normalized": "1.9.1.0"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "fzaninotto/faker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

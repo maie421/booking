@@ -12,5 +12,10 @@
             "email": "maie421@naver.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "fzaninotto/faker": "dev-master#c981c04 as 1.9.1"
+    },
+    "require": {
+        "clancats/hydrahon": "^1.1"
+    }
 }

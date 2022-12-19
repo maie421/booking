@@ -21,18 +21,39 @@ class ROOM
             ->get();
     }
 
-    function getRoomByType($room_type = ''){
+    function getRoomByType($room_type = '', $page = 1, $page_size = ''){
+        $last = $page * $page_size;
+        $first = $last - $page_size;
+
         if(empty($room_type)){
-            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code, r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code");
+            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code, r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code LIMIT :off, :lim");
             $stmt->bindValue(":member_code", COMMON::getSession('member_code'));
+            $stmt->bindValue(':off', $first, PDO::PARAM_INT);
+            $stmt->bindValue(':lim', $page_size, PDO::PARAM_INT);
         }else{
-            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code ,r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code where r.type = :type");
+            $stmt = DB_CONNECT::ROW_QUERY()->prepare("SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code ,r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code where r.type = :type LIMIT :off, :lim");
             $stmt->bindValue(":member_code", COMMON::getSession('member_code'));
             $stmt->bindValue(":type", $room_type);
+            $stmt->bindValue(':off', $first, PDO::PARAM_INT);
+            $stmt->bindValue(':lim', $page_size, PDO::PARAM_INT);
         }
+
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+
+    function getRoomByCount($room_type = ''){
+        $room = DB_CONNECT::DB()->table('room');
+
+        if(empty($room_type)){
+            return $room->select()
+                ->count();
+        }else{
+            return $room->select()
+                ->where('type', '=', $room_type)
+                ->count();
+        }
     }
 
     function updateRoomViewByCode(string $room_code, int $count){
