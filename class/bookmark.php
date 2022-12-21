@@ -4,12 +4,24 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 
 class BOOKMARK
 {
-    function getBookmark(){
+    function getBookmark($page, $list_num){
+        $last = $page * $list_num;
+        $first = $last - $list_num;
+
         $room = DB_CONNECT::DB()->table('bookmark');
 
         return $room->select()
             ->where('member_code', '=', COMMON::getSession('member_code'))
+            ->limit($first, $list_num)
             ->get();
+    }
+
+    function getBookmarkCount(){
+        $room = DB_CONNECT::DB()->table('bookmark');
+
+        return $room->select()
+            ->where('member_code', '=', COMMON::getSession('member_code'))
+            ->count();
     }
 
     function getBookmarkByRoomCode(string $room_code, string $member_code){

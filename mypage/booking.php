@@ -18,7 +18,6 @@ $booking_data = $booking->getBookingByMemberCode(COMMON::getSession('member_code
 $num = $booking->getBookingByMemberCodeCount(COMMON::getSession('member_code') ,$_GET['type']);
 
 
-
 $total_page = ceil($num / $list_num);
 $total_block = ceil($total_page / $page_num);
 $now_block = ceil($page / $page_num);
