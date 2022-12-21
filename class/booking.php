@@ -38,19 +38,40 @@ class BOOKING
             ->get();
     }
 
-    function getBookingByMemberCode($member_code, $type = '')
+    function getBookingByMemberCode($member_code, $type , $page , $list_num)
+    {
+        $last = $page * $list_num;
+        $first = $last - $list_num;
+
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        if(empty($type)){
+            return $booking->select()
+                ->where('member_code', '=', $member_code)
+                ->limit($first, $list_num)
+                ->get();
+        }else{
+            return $booking->select()
+                ->where('member_code', '=', $member_code)
+                ->where('booking_status', '=', $type)
+                ->limit($first, $list_num)
+                ->get();
+        }
+    }
+
+    function getBookingByMemberCodeCount($member_code, $type = '')
     {
         $booking = DB_CONNECT::DB()->table('booking');
 
         if(empty($type)){
             return $booking->select()
                 ->where('member_code', '=', $member_code)
-                ->get();
+                ->count();
         }else{
             return $booking->select()
                 ->where('member_code', '=', $member_code)
                 ->where('booking_status', '=', $type)
-                ->get();
+                ->count();
         }
     }
 
