@@ -21,7 +21,7 @@ foreach ($booking_data ?? [] as $booking_day) {
 }
 
 $login_member_type = $member->getLoginMemberTypeByCode();
-$login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
+$login_member_booking = $booking->getBookingByRoomMember($_GET['code']);
 ?>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -52,7 +52,7 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
             <?php
         } ?>
         저장
-        <?=$row['views']?>
+        <?= $row['views'] ?>
     </div>
     <div class="d-flex">
         <div class="p-2">
@@ -65,8 +65,8 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
                 <form class="reserveFormArray" method="post">
                     <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
                     <input type="hidden" name="member_code" value="<?= $row['member_code'] ?>">
-                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly >
-                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly >
+                    <input type="text" id="datepicker1" class="mb-3 datepicker1" name="start_date" readonly>
+                    <input type="text" id="datepicker2" class="mb-3 datepicker2" name="end_date" readonly>
                     <select class="form-select" aria-label="Default select example" name="people"
                             onclick="selectDay(<?= $row['price'] ?> );">
                         <?php
@@ -94,21 +94,22 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
     </div>
     <h4 class="mt-5 mb-5">위치</h4>
     <div id="map" class="d-flex p-2 " style="height: 450px;"></div>
-        <h4 class="mt-5 mb-5">후기</h4>
+    <h4 class="mt-5 mb-5">후기</h4>
     <?php
-    if($login_member_booking > 0 && $login_member_type != 'manager'){?>
-    <div class="mb-3">
-        <form action="/ajax/comment/insertComment.php" method="post">
-            <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
-            <label for="exampleFormControlTextarea1" class="form-label">후기 작성</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
-            </div>
-        </form>
-    </div>
-    <?php
-    }?>
+    if ($login_member_booking > 0 && $login_member_type != 'manager') {
+        ?>
+        <div class="mb-3">
+            <form action="/ajax/comment/insertComment.php" method="post">
+                <input type="hidden" name="room_code" value="<?= $row['room_code'] ?>">
+                <label for="exampleFormControlTextarea1" class="form-label">후기 작성</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
+                </div>
+            </form>
+        </div>
+        <?php
+    } ?>
     <?php
     foreach ($comment_data ?? [] as $data) {
         $member_data = $member->getMemberByCode($data['member_code']);
@@ -135,25 +136,29 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
                                                     <textarea class="form-control" id="textAreaExample" rows="4"
                                                               name="comment"><?= $data['comment'] ?></textarea>
                                     </p>
-                                    <?php if(COMMON::getSession('member_code') == $data['member_code']){?>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <?php
+                                    if (COMMON::getSession('member_code') == $data['member_code']) { ?>
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button"
-                                                    class="btn btn-primary text_<?= $data['comment_code'] ?>"
-                                                    onclick="reply('<?= $data['comment_code'] ?>')">수정
-                                            </button>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="button"
+                                                        class="btn btn-primary text_<?= $data['comment_code'] ?>"
+                                                        onclick="reply('<?= $data['comment_code'] ?>')">수정
+                                                </button>
+                                            </div>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="submit"
+                                                        class="btn btn-primary textarea_<?= $data['comment_code'] ?>"
+                                                        style="display: none">확인
+                                                </button>
+                                            </div>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit"
-                                                    class="btn btn-primary textarea_<?= $data['comment_code'] ?>"
-                                                    style="display: none">확인
-                                            </button>
-                                        </div>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
+                                    <?php
+                                    } ?>
                                 </div>
                             </form>
                             <?php
@@ -190,23 +195,26 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
                                                 </p>
                                             </div>
                                         </div>
-                                        <?php if($login_member_type == 'manager'){?>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button"
-                                                    class="btn btn-primary text_<?= $reply_data['comment_code'] ?>"
-                                                    onclick="reply('<?= $reply_data['comment_code'] ?>')">수정
-                                            </button>
-                                        </div>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit"
-                                                    class="btn btn-primary textarea_<?= $reply_data['comment_code'] ?>"
-                                                    style="display: none">확인
-                                            </button>
-                                        </div>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="button" class="btn btn-primary" onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제</button>
-                                        </div>
                                         <?php
+                                        if ($login_member_type == 'manager') { ?>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="button"
+                                                        class="btn btn-primary text_<?= $reply_data['comment_code'] ?>"
+                                                        onclick="reply('<?= $reply_data['comment_code'] ?>')">수정
+                                                </button>
+                                            </div>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="submit"
+                                                        class="btn btn-primary textarea_<?= $reply_data['comment_code'] ?>"
+                                                        style="display: none">확인
+                                                </button>
+                                            </div>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="deleteComment('<?= $data['comment_code'] ?>')">삭제
+                                                </button>
+                                            </div>
+                                            <?php
                                         } ?>
                                     </div>
                                 </form>
@@ -220,23 +228,25 @@ $login_member_booking =  $booking->getBookingByRoomMember($_GET['code']);
 
         <!--    <button type="button" class="btn btn-primary btn-sm mt-2">댓글달기</button>-->
         <?php
-        if($login_member_type == 'manager'){?>
-        <form action="/ajax/comment/insertRplyComment.php" method="post">
-            <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
-            <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
-            <div class="card-footer py-3 border-0">
-                <div class="d-flex flex-start w-100">
-                    <div class="form-outline w-100">
-                        <textarea class="form-control" id="textAreaExample" rows="4" name="reply_comment"></textarea>
+        if ($login_member_type == 'manager' && !$reply_comment_data) {
+            ?>
+            <form action="/ajax/comment/insertRplyComment.php" method="post">
+                <input type="hidden" name="room_code" value="<?= $data['room_code'] ?>">
+                <input type="hidden" name="comment_code" value="<?= $data['comment_code'] ?>">
+                <div class="card-footer py-3 border-0">
+                    <div class="d-flex flex-start w-100">
+                        <div class="form-outline w-100">
+                            <textarea class="form-control" id="textAreaExample" rows="4"
+                                      name="reply_comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="float-end mt-2 pt-1">
+                        <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
                     </div>
                 </div>
-                <div class="float-end mt-2 pt-1">
-                    <button type="submit" class="btn btn-outline-primary mt-3 ">작성하기</button>
-                </div>
-            </div>
-        </form>
-        <?php
-        }?>
+            </form>
+            <?php
+        } ?>
         <hr>
         <?php
     } ?>
