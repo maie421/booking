@@ -4,6 +4,12 @@ require_once dirname(__FILE__, 2).'/vendor/autoload.php';
 
 class ROOM
 {
+    public const ROOMTYPE = [
+        'motel' => '모텔',
+        'hotel' => '호텔',
+        'pension' => '펜션'
+    ];
+
     function getRoom($type, $page, $list_num){
         $last = $page * $list_num;
         $first = $last - $list_num;

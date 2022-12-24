@@ -2,14 +2,13 @@ const reserveForm = () => {
     var formValues = $(".reserveFormArray").serializeArray();
 
     $.ajax({
-        url: "../ajax/booking/insertBooking.php",
+        url: "../ajax/order/insertOrder.php",
         type: "POST",
         data: formValues,
         dataType: "JSON",
         success: function (data) {
             if (data.msg == 200){
-                alert('예약 완료');
-                setTimeout("location.reload()", 5);
+                location.href =`http://`+window.location.host+`/order?order=${data.data}`
             }else{
                 alert(data.msg);
             }
