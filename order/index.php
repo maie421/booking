@@ -10,7 +10,7 @@ $order_code = COMMON::keyCrypt($order_code,'d');
 
 $order_data = $order->getOrderByOrderCode($order_code);
 
-if(empty($_COOKIE["order_code"])){
+if(empty(COMMON::getSession('order_code'))){
     echo "<script>alert('주문서가 만료되었습니다');</script>";
     echo "<script>location.href='/room/?code={$order_data['room_code']}'</script>";
 }
@@ -51,7 +51,7 @@ $member_data = $member->getMemberByCode($order_data['member_code']);
         카카오 페이
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-        <button type="submit" class="btn btn-primary">결제하기</button>
+        <button type="submit" class="btn btn-primary" onclick="booking()">결제하기</button>
     </div>
 </div>
 </body>

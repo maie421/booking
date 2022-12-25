@@ -29,14 +29,17 @@ try {
             'price' => $gap->days * floor($row['price']),
         ]
     )->execute();
-    $hash_order_code = COMMON::keyCrypt($order_code);
 
-    setcookie("order_code", $hash_order_code, (time() + 3600 ), "/order");
     throw new Exception('200');
 } catch (Exception $e) {
     $msg = $e->getMessage();
     $result['msg'] = $msg;
-    $result['data'] = $hash_order_code;
+
+    if($msg == 200){
+        $hash_order_code = COMMON::keyCrypt($order_code);
+        $_SESSION['order_code'] = $hash_order_code;
+        $result['data'] = $hash_order_code;
+    }
 
     echo json_encode($result);
 }

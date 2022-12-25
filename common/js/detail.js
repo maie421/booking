@@ -16,6 +16,24 @@ const reserveForm = () => {
     });
 }
 
+const booking = () => {
+    $.ajax({
+        url: "../ajax/kakaoPay/ready.php",
+        type: "POST",
+        dataType: "JSON",
+        success: function (data) {
+            if (data.msg == 200){
+                window.name = "parentForm";
+                var status = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=360, height=420, top=0,left=0";
+                openWin = window.open(data.data, 'test', status);
+                // location.href =`http://`+window.location.host+`/order?order=${data.data}`
+            }else{
+                alert(data.msg);
+            }
+        }
+    });
+}
+
 const getDateDiff = (d1, d2) => {
     const date1 = new Date(d1);
     const date2 = new Date(d2);
