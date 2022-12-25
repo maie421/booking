@@ -83,6 +83,11 @@ foreach ($except_booking_data ?? [] as $except_booking) {
 // 특정일 선택막기
         function disableAllTheseDays(date) {
             var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+            d = ('00' + d).slice(-2);
+            m += 1;
+            if (m <= 9){
+                m = '0'+ m;
+            }
             for (i = 0; i < disabledDays.length; i++) {
                 if ($.inArray(y + '-' + (m + 1) + '-' + d, disabledDays) != -1) {
                     return [false];

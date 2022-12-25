@@ -281,8 +281,12 @@ $login_member_booking = $booking->getBookingByRoomMember($_GET['code']);
             function disableAllTheseDays(date) {
                 var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
                 d = ('00' + d).slice(-2);
+                m += 1;
+                if (m <= 9){
+                    m = '0'+ m;
+                }
                 for (i = 0; i < disabledDays.length; i++) {
-                    if ($.inArray(y + '-' + (m + 1) + '-' + d, disabledDays) != -1) {
+                    if ($.inArray(y + '-' + m + '-' + d, disabledDays) != -1) {
                         return [false];
                     }
                 }
