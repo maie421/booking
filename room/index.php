@@ -17,7 +17,7 @@ foreach ($booking_data ?? [] as $booking_day) {
     $start_date = date("Y-m-d", strtotime($booking_day['start_date']));
     $end_date = date("Y-m-d", strtotime($booking_day['end_date']));
 
-    $disabled_days = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
+    $disabled_days  = array_merge($disabled_days, COMMON::getDatesStartToLast($start_date, $end_date));
 }
 
 $login_member_type = $member->getLoginMemberTypeByCode();
@@ -28,9 +28,7 @@ $login_member_booking = $booking->getBookingByRoomMember($_GET['code']);
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e"></script>
-
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f46752a8c9c6dab8ea123dad4de18c3e&libraries=services"></script>
     <script src="../common/js/detail.js"></script>
     <script src="../common/js/main.js"></script>
     <script src="../common/js/comment.js"></script>
@@ -299,19 +297,35 @@ $login_member_booking = $booking->getBookingByRoomMember($_GET['code']);
                 level: 3 // 지도의 확대 레벨
             };
 
-        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+        // 지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        // 마커가 표시될 위치입니다
-        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
 
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('<?=$row['address']?>', function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;"><?=$row['name']?></div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
         });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
     </script>
 
 </div>
