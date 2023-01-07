@@ -75,19 +75,41 @@ class BOOKING
         }
     }
 
-    function getBookingByRoomMemberCodeFilter($member_code, $type = '')
+    function getBookingByRoomMemberCodeFilter($member_code, $page, $list_num, $type = '')
+    {
+        $last = $page * $list_num;
+        $first = $last - $list_num;
+
+        $booking = DB_CONNECT::DB()->table('booking');
+
+        if(empty($type)){
+            return $booking->select()
+                ->where('room_member_code', '=', $member_code)
+                ->limit($first, $list_num)
+                ->get();
+        }else{
+            return $booking->select()
+                ->where('room_member_code', '=', $member_code)
+                ->where('booking_status', '=', $type)
+                ->limit($first, $list_num)
+                ->get();
+        }
+
+    }
+
+    function getBookingByRoomMemberCodeFilterCount($member_code, $type)
     {
         $booking = DB_CONNECT::DB()->table('booking');
 
         if(empty($type)){
             return $booking->select()
                 ->where('room_member_code', '=', $member_code)
-                ->get();
+                ->count();
         }else{
             return $booking->select()
                 ->where('room_member_code', '=', $member_code)
                 ->where('booking_status', '=', $type)
-                ->get();
+                ->count();
         }
 
     }

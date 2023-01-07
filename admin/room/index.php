@@ -10,7 +10,7 @@ $list_num = 6;
 $page_num = 7;
 
 $row = $room->getRoom($type,(int)$page, $list_num);
-$num = $room->getRoomCount();
+$num = $room->getRoomCount($type);
 
 $total_page = ceil($num / $list_num);
 $total_block = ceil($total_page / $page_num);
