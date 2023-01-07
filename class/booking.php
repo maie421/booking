@@ -48,6 +48,7 @@ class BOOKING
         if(empty($type)){
             return $booking->select()
                 ->where('member_code', '=', $member_code)
+                ->orderBy('idx', 'desc')
                 ->limit($first, $list_num)
                 ->get();
         }else{
@@ -55,6 +56,7 @@ class BOOKING
                 ->where('member_code', '=', $member_code)
                 ->where('booking_status', '=', $type)
                 ->limit($first, $list_num)
+                ->orderBy('idx', 'desc')
                 ->get();
         }
     }
@@ -85,12 +87,14 @@ class BOOKING
         if(empty($type)){
             return $booking->select()
                 ->where('room_member_code', '=', $member_code)
+                ->orderBy('idx', 'desc')
                 ->limit($first, $list_num)
                 ->get();
         }else{
             return $booking->select()
                 ->where('room_member_code', '=', $member_code)
                 ->where('booking_status', '=', $type)
+                ->orderBy('idx', 'desc')
                 ->limit($first, $list_num)
                 ->get();
         }

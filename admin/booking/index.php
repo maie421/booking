@@ -10,7 +10,7 @@ if (empty($_GET['type'])) {
     $_GET['type'] = '';
 }
 
-$list_num = 6;
+$list_num = 12;
 $page_num = 7;
 
 $booking_data = $booking->getBookingByRoomMemberCodeFilter(COMMON::getSession('member_code'), (int)$page, $list_num, $_GET['type']);

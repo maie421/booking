@@ -12,6 +12,7 @@ class BOOKMARK
 
         return $room->select()
             ->where('member_code', '=', COMMON::getSession('member_code'))
+            ->orderBy('idx', 'desc')
             ->limit($first, $list_num)
             ->get();
     }

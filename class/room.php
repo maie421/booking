@@ -20,12 +20,14 @@ class ROOM
         if (empty($type)) {
             return $room->select()
                 ->where('member_code', '=', COMMON::getSession('member_code'))
+                ->orderBy('idx', 'desc')
                 ->limit($first, $list_num)
                 ->get();
         } else {
             return $room->select()
                 ->where('member_code', '=', COMMON::getSession('member_code'))
                 ->where('type', '=', $type)
+                ->orderBy('idx', 'desc')
                 ->limit($first, $list_num)
                 ->get();
         }
@@ -65,14 +67,14 @@ class ROOM
 
         if (empty($room_type)) {
             $stmt = DB_CONNECT::ROW_QUERY()->prepare(
-                "SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code, r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code LIMIT :off, :lim"
+                "SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code, r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code ORDER BY r.idx desc LIMIT :off, :lim"
             );
             $stmt->bindValue(":member_code", COMMON::getSession('member_code'));
             $stmt->bindValue(':off', $first, PDO::PARAM_INT);
             $stmt->bindValue(':lim', $page_size, PDO::PARAM_INT);
         } else {
             $stmt = DB_CONNECT::ROW_QUERY()->prepare(
-                "SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code ,r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code where r.type = :type LIMIT :off, :lim"
+                "SELECT r.room_code , r.price, r.img, r.member_code , b.bookmark_code ,r.name FROM room as r left join bookmark as b on r.room_code = b.room_code and b.member_code = :member_code where r.type = :type ORDER BY r.idx desc LIMIT :off, :lim"
             );
             $stmt->bindValue(":member_code", COMMON::getSession('member_code'));
             $stmt->bindValue(":type", $room_type);
