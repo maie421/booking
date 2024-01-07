@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="로컬" uuid="daf07bd0-6ea6-4bd6-b181-87864102392b">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="booking" uuid="daf07bd0-6ea6-4bd6-b181-87864102392b">
+      <driver-ref>mysql_aurora_aws</driver-ref>
       <synchronize>true</synchronize>
       <remarks>utm</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306</jdbc-url>
+      <jdbc-driver>software.aws.rds.jdbc.mysql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql:aws://127.0.0.1:3306?allowPublicKeyRetrieval=true&amp;useSSL=false</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
